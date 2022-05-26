@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ENG">
+<!--
+    Whatcha looking for?
+    You won't find the answers here anymore :)
+-->
+<head>
+    <title>Riddle of the Week</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
+    <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .fast {
+            transition: background-color 80ms cubic-bezier(1, 1, 1, 1);
+            transition-delay: 0s;
+        }
+
+        .slow {
+            transition: background-color 750ms cubic-bezier(1, 1, 1, 1);
+            transition-delay: 0s;
+        }
+
+        .blur {
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        a:link, a:visited {
+            color: red;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .unselectable {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .side {
+            position: absolute;
+            top: 35%;
+            right: 1%;
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="fast">
+
+    <div class="center">
+        <div id="riddleBox">
+            <h2 id="riddle" class="unselectable">Question</h2>
+            <div id="answerBox">
+                <label for="answer">Answer:</label>
+                <br>
+                <input type="text" id="answer"/>
+            </div>
+            <p>
+                <button type="submit" onclick="checkAnswer()">Submit</button>
+
+            <div id="hallInput" style="display: none">
+
+            <label for="name">Congrats on cracking the code!<br>Add your name to the Hall of Code Breakers!</label>
+
+            <p><input type="text" id="name"/></p>
+            <p><input type="color" id="inputColor" value="#000000">
+            <label for="inputColor">Text Colour</label></p>
+
+            <input type="checkbox" id="confirmNoCheat" onclick="enableSubmission()">
+            <label for="confirmNoCheat">I solemnly swear to not spoil the answer for others</label>
+
+            <p><button type="submit" id="submitBreaker" onclick="addToHall()" disabled="disabled">Submit name to Hall of Code Breakers</button></p>
+
+            </div>
+            <p>
+
+            <div id="result" style="display: none"></div>
+        </div>
+    </div>
+
+    <div id="last">
+        Last week's riddle & answer:
+    </div>
+
+    <div id="codeBreakers" class="side">
+        <h2 style='color:goldenrod; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
+        <b>Figure out and submit NEXT week's answer<br>to add your name here</b>
+        <div id="breakerList"></div>
+    </div>
+
+    <div id="rick" class="footer">
+        <a href="rotw/riddleanswers.html" target="_blank">Riddle Answers: NOT FOR NINJA EYES</a>
+        <p>
+            <a href="/rotw/riddles.txt" target="_blank" style="color: #888888">
+                Just kidding, here are the real answers. Good luck trying to read them :)
+            </a>
+        </p>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
+        import { getDatabase, ref, get, set, child } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRHo5QphDs9HQn2eJsQjugnE1gTVkiA6E",
+            authDomain: "joshuaburt-dev.firebaseapp.com",
+            projectId: "joshuaburt-dev",
+            storageBucket: "joshuaburt-dev.appspot.com",
+            messagingSenderId: "802039798789",
+            appId: "1:802039798789:web:a62f70cd2a7f53acbd906c",
+            measurementId: "G-G6J463XCRC"
+        };
+
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+
+
+        // Get list of names of code breakers
+        const dbRef = ref(db);
+        get(child(dbRef, `codeBreakers/name/`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                let nameList = [];
+                let colorList = [];
+
+                // Get name and colour values from firebase and insert into two arrays
+                snapshot.forEach((child) => {
+                    nameList.push(child.val().name);
+                    colorList.push(child.val().color);
+                });
+
+                let string = "";
+
+                for(let i = 0; i < nameList.length; i++) {
+                    string += "<div style='color: " + colorList[i] + "'>" + nameList[i] + "</div>";
+                }
+
+                document.getElementById("breakerList").innerHTML = "<p>" + string + "</p>"
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+
+
+        function writeUserData(name, color) {
+            const db = getDatabase();
+
+            let regex = /(<([^>]+)>)/ig
+            let result = name.replace(regex, "");
+
+            set(ref(db, 'codeBreakers/name/' + Date.now()), {
+                color: color,
+                name: result
+            });
+        }
+
+        window.writeUserData = writeUserData;
+    </script>
+
+    <script defer>
+        let riddles;
+        let currentRiddle;
+        let nextRiddleAnswer;
+        let gotNextRiddle = false;
+
+
+        // Create a Riddle object to hold the riddles
+        class Riddle {
+            constructor(riddle, answer) {
+                this.riddle = riddle;
+                this.answer = answer;
+            }
+        }
+
+        // Returns the current week number
+        Date.prototype.getWeekNumber = function(){
+            let d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+            let dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+        };
+
+
+        // Get file containing the encrypted riddle questions and answers
+        fetch("rotw/riddles.txt")
+            .then(response => response.text())
+            .then(data => {
+                // Take the encrypted riddles and decrypt them and parse through them
+                let input = antiCipher(atob(data));
+                riddles = parseRiddles(input);
+
+                // Get the current riddle number (By the week number)
+                let riddleNumber = getRiddleNumber();
+                let lastRiddleNumber = riddleNumber - 1;
+
+                //Retrieve the riddles based on the number and display on screen
+                if(riddleNumber >= riddles.length || riddleNumber < 0) {
+                    document.getElementById("riddle").innerHTML = "Josh needs to add more riddles :)"
+                } else {
+                    // Current Riddle
+                    currentRiddle = riddles[riddleNumber];
+                    document.getElementById("riddle").innerHTML = currentRiddle.riddle;
+
+                    // Last Riddle
+                    let lastRiddle = riddles[lastRiddleNumber];
+                    document.getElementById("last").innerHTML = "<h3>Last week's riddle & answer:</h3><br><i>" + lastRiddle.riddle + "</i><br>" + "<b>" + antiCipher(atob(lastRiddle.answer)) + "</b>";
+
+                    // Next Riddle
+                    if(riddleNumber + 1 < riddles.length) {
+                        nextRiddleAnswer = riddles[riddleNumber + 1].answer;
+                    }
+                }
+            });
+
+
+        // Take the unencrypted riddles and parse the questions and answers into objects
+        function parseRiddles(data) {
+            // Split the decrypted riddles into an array
+            let riddles = [];
+            let lines = data.split("\n");
+
+            // Go through each string in the array
+            // Strings starting with ~ are a riddle question
+            // Strings starting with = are a riddle answer
+            for(let i = 0; i < lines.length; i++) {
+                if(lines[i].includes("~")) {
+                    // Once the ~ has been found, the line after is always the =
+                    let riddle = lines[i].substr(1);
+                    let answer = cipher(lines[i + 1].substr(1).trim());
+
+                    // Skip over a line to ignore the =
+                    i += 1;
+
+                    // Create a new riddle object and add to the array of riddles
+                    let riddleObj = new Riddle(riddle, answer);
+                    riddles.push(riddleObj);
+                }
+            }
+            return riddles;
+        }
+
+
+        // Confirm if the user has gotten the correct answer and display the result
+        function checkAnswer() {
+            let userAnswer = document.getElementById("answer").value;
+
+            if(userAnswer.length > 0) {
+                // Set the delay for the background colour to fast
+                document.body.className = "fast";
+
+                // Entered the current riddle answer
+                if(equalsIgnoringCase(userAnswer.trim(), antiCipher(atob(currentRiddle.answer)))) {
+                    document.body.style.backgroundColor = 'rgb(' + [85,228,47].join(",") + ')';
+                    document.getElementById("result").style.display = "inline-block";
+                    document.getElementById("result").innerHTML = "Nice job! Go and write your name on the board! :D<br>Don't spoil the answer!";
+                    document.getElementById("answer").className = "blur";
+
+                // Entered the next riddle answer
+                } else if(equalsIgnoringCase(userAnswer.trim(), antiCipher(atob(nextRiddleAnswer)))) {
+                    document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
+                    document.getElementById("result").style.display = "none";
+                    document.getElementById("hallInput").style.display = "inline-block";
+                    document.getElementById("answer").className = "blur";
+
+                    gotNextRiddle = true;
+
+                // Entered an incorrect answer
+                } else {
+                    document.body.style.backgroundColor = 'rgb(' + [224,74,74].join(",") + ')';
+                    document.getElementById("result").style.display = "inline-block";
+                    document.getElementById("result").innerHTML = "Incorrect! Try again :)";
+                    $( "#answerBox" ).effect("shake", {times:2, distance:10});
+                    document.getElementById("answer").className = "";
+
+                    setTimeout(() => {
+                        document.body.className = "slow";
+                        document.body.style.backgroundColor = 'rgb(' + [233,233,233].join(",") + ')';
+                    }, 500);
+                }
+            }
+        }
+
+
+
+        // Helper functions
+
+        //TODO: Implement swear filter
+        function swearFilter(string) {
+
+        }
+
+        // Make sure the checkbox is selected before the user can submit their name
+        function enableSubmission() {
+            document.getElementById("submitBreaker").disabled = !document.getElementById("confirmNoCheat").checked;
+        }
+
+        function getRiddleNumber() {
+            return new Date().getWeekNumber();
+        }
+
+        // Retrieves the name and text colour for the Hall of Code Breakers
+        function addToHall() {
+            let name = document.getElementById("name").value
+
+            if(gotNextRiddle && name.length > 0 && document.getElementById("confirmNoCheat").checked) {
+                let color = document.getElementById("inputColor").value
+
+                window.writeUserData(name, color);
+
+                // Wait 0.1 seconds before reloading to make sure Firebase uploads
+                setTimeout(function(){
+                    location.reload()
+                }, 100);
+            }
+        }
+
+        function equalsIgnoringCase(text, other) {
+            return text.localeCompare(other, undefined, {sensitivity: 'base'}) === 0 || text.includes(other);
+        }
+
+        // If you're reading comments, this is a pretty good place to start
+        function antiCipher(inputStr) {
+            let values = "";
+            let tokens = inputStr.split(" ");
+
+            for(let i = 0; i < tokens.length; i++) {
+                values += String.fromCharCode(parseInt(tokens[i]));
+            }
+            return values;
+        }
+
+        function cipher(inputStr) {
+            let values = "";
+            for(let i = 0; i < inputStr.length; i++) {
+                values += inputStr.charCodeAt(i) + " ";
+            }
+
+            return btoa(values.trimEnd());
+        }
+    </script>
+</body>
+</html>
