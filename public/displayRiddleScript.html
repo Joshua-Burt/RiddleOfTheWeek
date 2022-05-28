@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riddle Script</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <script src="scripts/riddleScript.js" defer></script>
+    <style>
+        .hljs-ln-n {
+            padding-right: 15px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>This code collects and displays the riddles</h2>
+        See if you can figure out how to decrypt them!
+        <br>Press <b>F12 > Console</b> to try out the different functions
+        <p>
+            Think you've reverse engineered the encryption?
+            <br><a href="https://playcode.io/empty_javascript" target="_blank">Try testing it out in JavaScript here!</a>
+        </p>
+    </div>
+
+    <pre style="padding-top: 10px; text-align: left;">
+        <code class="language-js" id="codeDisplay">
+        </code>
+    </pre>
+
+
+    <script>
+        fetch("scripts/riddleScript.js")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');
+                hljs.highlightAll();
+                hljs.initLineNumbersOnLoad();
+            });
+    </script>
+</body>
+</html>

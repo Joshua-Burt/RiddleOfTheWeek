@@ -1,0 +1,7 @@
+{
+  "name": "Joshua-Burt.github.io.Firebase",
+  "version": "1.0.0",
+  "dependencies": {
+    "highlight.js": "^11.5.1"
+  }
+}

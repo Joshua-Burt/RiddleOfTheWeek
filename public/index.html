@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="ENG">
 <!--
-    Whatcha looking for?
-    You won't find the answers here anymore :)
+    The JavaScript has changed locations,
+    take a look below the Hall of Code Breakers!
 -->
 <head>
     <title>Riddle of the Week</title>
     <link rel="stylesheet" href="stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
+
+    <script src="scripts/cipher.js" defer></script>
     <script src="scripts/riddleScript.js" defer></script>
     <script type="module" src="scripts/firebaseDatabase.js"></script>
+
     <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,7 +33,7 @@
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
-        a:link, a:visited {
+        a.rick {
             color: red;
             background-color: transparent;
             text-decoration: none;
@@ -63,7 +66,6 @@
     </style>
 </head>
 <body class="fast">
-
     <div class="center">
         <div id="riddleBox">
             <h2 id="riddle" class="unselectable">Question</h2>
@@ -102,11 +104,12 @@
     <div id="codeBreakers" class="side">
         <h2 style='color:goldenrod; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
         <b>Figure out and submit NEXT week's answer<br>to add your name here</b>
+        <br><a href="displayRiddleScript.html" style>riddleScript.js</a>
         <div id="breakerList"></div>
     </div>
 
     <div id="rick" class="footer">
-        <a href="rotw/riddleanswers.html" target="_blank">Riddle Answers: NOT FOR NINJA EYES</a>
+        <a href="rotw/riddleanswers.html" target="_blank" class="rick">Riddle Answers: NOT FOR NINJA EYES</a>
         <p>
             <a href="/rotw/riddles.txt" target="_blank" style="color: #888888">
                 Just kidding, here are the real answers. Good luck trying to read them :)

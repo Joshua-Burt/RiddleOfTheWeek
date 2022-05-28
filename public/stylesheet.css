@@ -7,79 +7,13 @@ body {
     background-color: #e9e9e9;
     text-align: center;
 }
-.rectangle {
-    height: 250px;
-    width: 450px;
-    transform: rotate(-5deg);
-    filter: drop-shadow(-1px 6px 5px rgba(50, 50, 0, 0.5));
-    text-align: center;
-    position:absolute;
-    left:50%;
-    top:500px;
-    margin-top:-200px;
-    margin-left:-225px;
-    background: #ffffff url("imgs/cardTexture.png");
-}
 
 html {
     overflow: scroll;
     overflow-x: hidden;
 }
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-}
 
-.underCard {
-    font-family: "Roboto", sans-serif;
-    position:absolute;
-    top:310px;
-    left:50%;
-    z-index: 1;
-    margin-left: -150px
-}
-
-.navigation-group {
-    height: 200px;
-    width: 600px;
-    position:absolute;
-    top:600px;
-    left:50%;
-    margin-left:-300px;
-}
-
-.media-group {
-    position:absolute;
-    top: 850px;
-    left: 50%;
-    margin-left: -50px;
-}
-
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
-}
-
-.button {
-    background-color: #3C8DB2;
-    border: 2px solid #3C8DB2;
-    color: white;
-    font-weight: bold;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition-duration: 0.4s;
-}
-
-
-
-.button:hover {
-    background-color: #ffffff;
-    border: 2px solid #55a6cb;
-    color: black;
-}
+.
 
 .content {
     padding: 0 18px;
@@ -87,13 +21,6 @@ html {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     background-color: #f1f1f1;
-}
-
-.hello {
-    margin: 0;
-    padding: 0;
-    color: #FF0000;
-    font-family: lemonMilk,Roboto,sans-serif;
 }
 
 .outline {
