@@ -16,18 +16,6 @@ class Riddle {
 
 
 /**
- * @returns {number}    Current week number
- */
-Date.prototype.getWeekNumber = function(){
-    let d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
-    let dayNum = d.getUTCDay() || 7;
-    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-    let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
-};
-
-
-/**
  * Get file containing the encrypted riddle questions and answers
  */
 fetch("rotw/riddles.txt")
@@ -149,7 +137,9 @@ function checkAnswer() {
  * @param places    Number of total characters to pad to
  * @returns {string}    String containing num padded to places
  */
-const zeroPad = (num, places) => String(num).padStart(places, '0')
+function zeroPad(num, places) {
+    return String(num).padStart(places, '0')
+}
 
 
 
@@ -185,9 +175,20 @@ function enableSubmission() {
     document.getElementById("submitBreaker").disabled = !document.getElementById("confirmNoCheat").checked;
 }
 
+/**
+ * @returns {number}    Current week number
+ */
+Date.prototype.getWeekNumber = function(){
+    let d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+    let dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+};
+
 
 /**
- * @returns {number}    The current week number
+ * @returns {number}    Current week number
  */
 function getRiddleNumber() {
     return new Date().getWeekNumber();
@@ -214,7 +215,12 @@ function addToHall() {
 }
 
 
-// Compares two different texts, but ignores if the letters are upper or lower case
+/**
+ * Compares two different texts, but ignores if the letters are upper or lower case
+ * @param text      Text 1 to compare
+ * @param other     Text 2 to compare
+ * @returns {boolean|*}     True if they are the same, false otherwise
+ */
 function equalsIgnoringCase(text, other) {
     return text.localeCompare(other, undefined, {sensitivity: 'base'}) === 0 || text.includes(other);
 }
@@ -262,7 +268,7 @@ function cipher(inputStr) {
     let array = values.split(" ");
 
     for(let i = 0; i < array.length; i++) {
-        let binary = parseInt(array[i]).toString(2);
+        let binary = parseInt(array[i], 10).toString(2);
 
         array[i] = zeroPad(binary, 8);
         array[i] = bitFlip(array[i]);

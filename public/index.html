@@ -2,7 +2,7 @@
 <html lang="ENG">
 <!--
     The JavaScript has changed locations,
-    take a look below the Hall of Code Breakers!
+    look below the Hall of Code Breakers!
 -->
 <head>
     <title>Riddle of the Week</title>
@@ -78,18 +78,16 @@
                 <button type="submit" onclick="checkAnswer()">Submit</button>
 
             <div id="hallInput" style="display: none">
+                <label for="name">Congrats on cracking the code!<br>Add your name to the Hall of Code Breakers!</label>
 
-            <label for="name">Congrats on cracking the code!<br>Add your name to the Hall of Code Breakers!</label>
+                <p><input type="text" id="name"/></p>
+                <p><input type="color" id="inputColor" value="#000000">
+                <label for="inputColor">Text Colour</label></p>
 
-            <p><input type="text" id="name"/></p>
-            <p><input type="color" id="inputColor" value="#000000">
-            <label for="inputColor">Text Colour</label></p>
+                <input type="checkbox" id="confirmNoCheat" onclick="enableSubmission()">
+                <label for="confirmNoCheat">I solemnly swear to not spoil the answer for others</label>
 
-            <input type="checkbox" id="confirmNoCheat" onclick="enableSubmission()">
-            <label for="confirmNoCheat">I solemnly swear to not spoil the answer for others</label>
-
-            <p><button type="submit" id="submitBreaker" onclick="addToHall()" disabled="disabled">Submit name to Hall of Code Breakers</button></p>
-
+                <p><button type="submit" id="submitBreaker" onclick="addToHall()" disabled="disabled">Submit name to Hall of Code Breakers</button></p>
             </div>
             <p>
 
@@ -104,7 +102,7 @@
     <div id="codeBreakers" class="side">
         <h2 style='color:goldenrod; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
         <b>Figure out and submit NEXT week's answer<br>to add your name here</b>
-        <br><a href="displayRiddleScript.html" style>riddleScript.js</a>
+        <p>See the JavaScript here: <a href="displayRiddleScript.html" target="_blank">riddleScript.js</a></p>
         <div id="breakerList"></div>
     </div>
 
