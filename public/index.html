@@ -7,6 +7,8 @@
 <head>
     <title>Riddle of the Week</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="lib/http_www.w3schools.com_w3css_4_w3.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
 
@@ -58,9 +60,9 @@
 
         .side {
             position: absolute;
-            top: 35%;
+            top: 30%;
             right: 1%;
-            width: 25%;
+            width: fit-content;
             text-align: center;
         }
     </style>
@@ -99,10 +101,14 @@
         Last week's riddle & answer:
     </div>
 
-    <div id="codeBreakers" class="side">
-        <h2 style='color:goldenrod; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
+    <div id="codeBreakers" class="side w3-panel w3-sand w3-large w3-serif w3-round-xxlarge w3-border">
+        <h2 style='color:#f5b416; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
         <b>Figure out and submit NEXT week's answer<br>to add your name here</b>
         <p>See the JavaScript here: <a href="displayRiddleScript.html" target="_blank">riddleScript.js</a></p>
+        <hr>
+
+        <button id="prevCodeBreaker" onclick="window.previousCodeBreakers()"><</button>
+        <button id="nextCodeBreaker" onclick="window.nextCodeBreakers()" disabled>></button>
         <div id="breakerList"></div>
     </div>
 
