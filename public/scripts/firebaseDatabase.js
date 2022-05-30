@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
-import { getDatabase, ref, get, set, child } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
+import {child, get, getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
 
 // Firebase configuration
@@ -91,6 +91,8 @@ function previousCodeBreakers() {
     }
     document.getElementById("nextCodeBreaker").disabled = false;
     document.getElementById("prevCodeBreaker").disabled = currentEncryptionNum === 0;
+
+    displayExplanation();
 }
 
 function nextCodeBreakers() {
@@ -101,8 +103,44 @@ function nextCodeBreakers() {
     }
     document.getElementById("prevCodeBreaker").disabled = false;
     document.getElementById("nextCodeBreaker").disabled = currentEncryptionNum === lists.length - 1;
+
+    displayExplanation();
 }
 
+function displayExplanation() {
+    if(currentEncryptionNum !== mostRecentEncryption) {
+        document.getElementById("explanation").style.display = "inline"
+
+        if(UrlExists("/explain/encryption" + currentEncryptionNum + ".html")) {
+            document.getElementById("explainLink").innerHTML = "<a href='/explain/encryption" + currentEncryptionNum + ".html'>Here</a>";
+        } else {
+            document.getElementById("explainLink").innerHTML = "Explanation coming soon™!"
+        }
+    } else {
+        document.getElementById("explanation").style.display = "none"
+    }
+}
+
+function UrlExists(url) {
+    let http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status !== 404;
+}
+
+function doesPageExist(url) {
+    return new File(url).exists();
+    // return $.ajax({
+    //     type: 'HEAD',
+    //     url: url,
+    //     success: function () {
+    //         return true;
+    //     },
+    //     error: function () {
+    //         return false;
+    //     }
+    // });
+}
 
 function writeUserData(name, color) {
     const db = getDatabase();
