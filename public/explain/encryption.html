@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Encryption 0 - Base 64/Char Code</title>
     <link rel="stylesheet" href="../stylesheet.css">
+    <link rel="stylesheet" href="../lib/http_www.w3schools.com_w3css_4_w3.css">
     <link rel="shortcut icon" type="image/x-icon" href="../rotw/favicon.ico"/>
     <style>
         .main {
@@ -20,8 +21,272 @@
     <p>
     <div id="main" class="main">
         <h3>To start, we will need to know what a "base" is</h3>
-        <p>I think the easiest way to understand that is to look at a smaller base system
-        <p>
+        <p>Essentially, it is just different ways to count. The way we count, called <b>decimal</b> or "base 10", has 10 numbers.
+        <p style="margin: 10px; padding:10px; width: fit-content" class="w3-panel w3-sand w3-xxlarge w3-serif w3-border">
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        </p>
+        Because it has 10 numbers, we call it base 10. Once we get to the "last" number on that list, we need to change how we continue
+        <p style="margin: 10px; padding:10px; width: fit-content" class="w3-panel w3-sand w3-xxlarge w3-serif w3-border">
+            ...07, 08, 09, 10, 11, 12...
+        </p>
+
+        The seemingly obvious but super important part is that after the last number in our list, we needed to set it to 0, then add 1 to the place to the left
+        <br>Holding onto that knowledge, lets learn about Base 64
+
+        <p><h3>Base 64</h3>
+
+        <p>Base 64 has 64 characters
+
+        <table style="text-align:center">
+            <tbody>
+            <tr>
+                <th scope="col">Index</th>
+
+                <th scope="col">Char
+                </th>
+                <td rowspan="17">
+                </td>
+                <th scope="col">Index</th>
+
+                <th scope="col">Char
+                </th>
+                <td rowspan="17">
+                </td>
+                <th scope="col">Index</th>
+
+                <th scope="col">Char
+                </th>
+                <td rowspan="17">
+                </td>
+                <th scope="col">Index</th>
+
+                <th scope="col">Char
+                </th></tr>
+            <tr>
+                <td>0</td>
+                <td><code>A</code></td>
+
+                <td>16</td>
+                <td><code>Q</code></td>
+                <td>32</td>
+
+                <td><code>g</code></td>
+                <td>48</td>
+
+                <td><code>w</code>
+                </td></tr>
+            <tr>
+                <td>1</td>
+
+                <td><code>B</code></td>
+                <td>17</td>
+
+                <td><code>R</code></td>
+                <td>33</td>
+
+                <td><code>h</code></td>
+                <td>49</td>
+
+                <td><code>x</code>
+                </td></tr>
+            <tr>
+                <td>2</td>
+
+                <td><code>C</code></td>
+                <td>18</td>
+
+                <td><code>S</code></td>
+                <td>34</td>
+
+                <td><code>i</code></td>
+                <td>50</td>
+
+                <td><code>y</code>
+                </td></tr>
+            <tr>
+                <td>3</td>
+
+                <td><code>D</code></td>
+                <td>19</td>
+
+                <td><code>T</code></td>
+                <td>35</td>
+
+                <td><code>j</code></td>
+                <td>51</td>
+
+                <td><code>z</code>
+                </td></tr>
+            <tr>
+                <td>4</td>
+
+                <td><code>E</code></td>
+                <td>20</td>
+
+                <td><code>U</code></td>
+                <td>36</td>
+
+                <td><code>k</code></td>
+                <td>52</td>
+
+                <td><code>0</code>
+                </td></tr>
+            <tr>
+                <td>5</td>
+
+                <td><code>F</code></td>
+                <td>21</td>
+
+                <td><code>V</code></td>
+                <td>37</td>
+
+                <td><code>l</code></td>
+                <td>53</td>
+
+                <td><code>1</code>
+                </td></tr>
+            <tr>
+                <td>6</td>
+
+                <td><code>G</code></td>
+                <td>22</td>
+
+                <td><code>W</code></td>
+                <td>38</td>
+
+                <td><code>m</code></td>
+                <td>54</td>
+
+                <td><code>2</code>
+                </td></tr>
+            <tr>
+                <td>7</td>
+
+                <td><code>H</code></td>
+                <td>23</td>
+
+                <td><code>X</code></td>
+                <td>39</td>
+
+                <td><code>n</code></td>
+                <td>55</td>
+
+                <td><code>3</code>
+                </td></tr>
+            <tr>
+                <td>8</td>
+
+                <td><code>I</code></td>
+                <td>24</td>
+
+                <td><code>Y</code></td>
+                <td>40</td>
+
+                <td><code>o</code></td>
+                <td>56</td>
+
+                <td><code>4</code>
+                </td></tr>
+            <tr>
+                <td>9</td>
+
+                <td><code>J</code></td>
+                <td>25</td>
+
+                <td><code>Z</code></td>
+                <td>41</td>
+
+                <td><code>p</code></td>
+                <td>57</td>
+
+                <td><code>5</code>
+                </td></tr>
+            <tr>
+                <td>10</td>
+
+                <td><code>K</code></td>
+                <td>26</td>
+
+                <td><code>a</code></td>
+                <td>42</td>
+
+                <td><code>q</code></td>
+                <td>58</td>
+
+                <td><code>6</code>
+                </td></tr>
+            <tr>
+                <td>11</td>
+
+                <td><code>L</code></td>
+                <td>27</td>
+
+                <td><code>b</code></td>
+                <td>43</td>
+
+                <td><code>r</code></td>
+                <td>59</td>
+
+                <td><code>7</code>
+                </td></tr>
+            <tr>
+                <td>12</td>
+
+                <td><code>M</code></td>
+                <td>28</td>
+
+                <td><code>c</code></td>
+                <td>44</td>
+
+                <td><code>s</code></td>
+                <td>60</td>
+
+                <td><code>8</code>
+                </td></tr>
+            <tr>
+                <td>13</td>
+
+                <td><code>N</code></td>
+                <td>29</td>
+
+                <td><code>d</code></td>
+                <td>45</td>
+
+                <td><code>t</code></td>
+                <td>61</td>
+
+                <td><code>9</code>
+                </td></tr>
+            <tr>
+                <td>14</td>
+
+                <td><code>O</code></td>
+                <td>30</td>
+
+                <td><code>e</code></td>
+                <td>46</td>
+
+                <td><code>u</code></td>
+                <td>62</td>
+
+                <td><code>+</code>
+                </td></tr>
+            <tr>
+                <td>15</td>
+
+                <td><code>P</code></td>
+                <td>31</td>
+
+                <td><code>f</code></td>
+                <td>47</td>
+
+                <td><code>v</code></td>
+                <td>63</td>
+
+                <td><code>/</code>
+                </td></tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
