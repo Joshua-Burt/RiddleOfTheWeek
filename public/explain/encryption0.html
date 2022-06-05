@@ -9,54 +9,91 @@
     <style>
         .main {
             margin-left: 25%;
-            margin-top: 100px;
+            margin-top: 50px;
             width: 50%;
             text-align: left;
+        }
 
+        .quick {
+            margin-top: 25px;
+            margin-left: 25%;
+            width: 50%;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .word, .code, .base {
+            width: fit-content;
+            margin: auto;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Base 64 and Character Codes</h1>
-    <p>
+    <h1 style="margin-top: 25px">Character Codes and Base 64</h1>
+
+    <div class="quick">
+        <div id="word" class="w3-panel w3-sand w3-serif w3-border word"></div> (Original Word)
+        <h2>🢃</h2>
+        <div id="code" class="w3-panel w3-sand w3-serif w3-border code"></div> (Character Codes)
+        <h2>🢃</h2>
+        <div id="base" class="w3-panel w3-sand w3-serif w3-border base"></div> (Base 64)
+
+        <hr>
+    </div>
     <div id="main" class="main">
-        <h3>To start, we will need to know what a "base" is</h3>
-        <p>Essentially, it is just different ways to count. The way we count, called <b>decimal</b> or "base 10", has 10 numbers.
-        <p style="margin: 10px; padding:10px; width: fit-content" class="w3-panel w3-sand w3-xxlarge w3-serif w3-border">
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        <h2 style="text-align: center; margin-top: 50px">Character Codes</h2>
+        <p></p>
+        Character codes are fairly simple. When you type some text, the computer doesn't store the actual text, but rather numbers to represent the text. The computer then has a system that allows it to know what to display when it receives a number
+
+        <p>For instance, the capital letter H can be encoded as the decimal number 72, as seen in the "Hello!" example above.
+
+        <p>The thing is, there are a lot of different characters in the world. In the image below is every symbol in the <a href="https://en.wikipedia.org/wiki/UTF-16" target="_blank">UTF-16</a> system</p>
+        <p>It looks like a lot of random noise, but if you click on the image and zoom in, you'll see each part is its own symbol!
+
+        <p style="text-align: center"><a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/0/01/Unifont_Full_Map.png"><img alt="Unifont Full Map.png" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/01/Unifont_Full_Map.png/250px-Unifont_Full_Map.png" decoding="async" width="250" height="252" data-file-width="4128" data-file-height="4160"></a>
+        <br><a href="https://commons.wikimedia.org/wiki/File:Unifont_Full_Map.png">RokerHRO</a>, Public domain, via Wikimedia Commons
+        <hr>
+        <h2 style="text-align: center; margin-top: 50px">Base 64</h2>
+        <p style="text-align: center">
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/gocwRvLhDf8" title="YouTube video player" border="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </p>
-        Because it has 10 numbers, we call it base 10. Once we get to the "last" number on that list, we need to change how we continue
-        <p style="margin: 10px; padding:10px; width: fit-content" class="w3-panel w3-sand w3-xxlarge w3-serif w3-border">
-            ...07, 08, 09, 10, 11, 12...
+        Check out Tom Scott's video on Base64, he does a fantastic job explaining it!
+
+        <p>If you are more hands on, check out <a href="https://joshuaburt.dev/webtoys/base.html" target="_blank">my website's page</a> for this!
+
+        <p>Essentially, it is just a different way to count. The way we count, called <b>decimal</b> or "base 10", has 10 symbols.
+        <p style="margin: 10px 10px 10px 25%;padding:10px; width: fit-content;" class="w3-panel w3-sand w3-xxlarge w3-serif w3-border">
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
         </p>
 
-        The seemingly obvious but super important part is that after the last number in our list, we needed to set it to 0, then add 1 to the place to the left
-        <br>Holding onto that knowledge, lets learn about Base 64
+        Base 64 has 64 symbols. We call them symbols because we don't just use numbers, but letters and other characters too!
 
-        <p><h3>Base 64</h3>
+        <p>The encoding used for the riddle encryption was a JavaScript function called <code>btoa()</code>, which encodes the text into Base 64.</p>
 
-        <p>Base 64 has 64 characters
-
-        <table style="text-align:center">
+        <table style="text-align:center; margin-left: 25%" class="w3-panel w3-sand w3-serif w3-border">
             <tbody>
+            <tr><th style="text-align: center" colspan="11">Base 64 Character Set</th></tr>
             <tr>
                 <th scope="col">Index</th>
 
                 <th scope="col">Char
                 </th>
-                <td rowspan="17">
+                <td rowspan="17" style="padding-left: 20px;">
                 </td>
                 <th scope="col">Index</th>
 
                 <th scope="col">Char
                 </th>
-                <td rowspan="17">
+                <td rowspan="17" style="padding-left: 20px;">
                 </td>
                 <th scope="col">Index</th>
 
                 <th scope="col">Char
                 </th>
-                <td rowspan="17">
+                <td rowspan="17" style="padding-left: 20px;">
                 </td>
                 <th scope="col">Index</th>
 
@@ -287,6 +324,30 @@
                 </td></tr>
             </tbody>
         </table>
+        <div style="text-align: center">
+            <a href="https://en.wikipedia.org/wiki/Base64" target="_blank">Base 64</a>, Wikipedia
+        </div>
     </div>
+
+
+    <script>
+        let word = "Hello!"
+        let char = toCharCodeString(word);
+        let base = btoa(char);
+        document.getElementById("word").innerHTML = "<h2>" + word + "</h2>";
+        document.getElementById("code").innerHTML = "<h2>" + char + "</h2>";
+        document.getElementById("base").innerHTML = "<h2>" + base + "</h2>";
+
+
+        function toCharCodeString(inputStr) {
+            let str = "";
+
+            for(let i = 0; i < inputStr.length; i++) {
+                str += inputStr.charCodeAt(i) + " ";
+            }
+
+            return str.trimEnd();
+        }
+    </script>
 </body>
 </html>
