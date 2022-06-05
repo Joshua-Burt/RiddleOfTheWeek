@@ -1,0 +1,7 @@
+[{
+  "relation": ["lookalikes/allowlist"],
+  "target" : { "namespace": "web", "site": "https://joshuaburt.dev"}
+},{
+  "relation": ["lookalikes/allowlist"],
+  "target" : { "namespace": "web", "site": "https://joshuaburt-dev.web.app"}
+}]
