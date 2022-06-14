@@ -69,7 +69,11 @@ function parseRiddles(data) {
         if(lines[i].includes("~")) {
             // Once the ~ has been found, the line after is always the =
             let riddle = lines[i].substr(1);
-            let answer = cipher(lines[i + 1].substr(1).trim());
+            let answer = lines[i + 1].substr(1).trim().split(",");
+
+            for(let j = 0; j < answer.length; j++) {
+                answer[j] = cipher(answer[j]);
+            }
 
             // Skip over a line to ignore the =
             i += 1;
@@ -94,33 +98,37 @@ function checkAnswer() {
         document.body.className = "fast";
 
         // Entered the current riddle answer
-        if(equalsIgnoringCase(userAnswer.trim(), sec(currentRiddle.answer))) {
+        let sec1 = sec(currentRiddle.answer);
+        let sec2 = sec(nextRiddleAnswer);
+        if(equalsIgnoringCase(userAnswer.trim(), sec1)) {
             document.body.style.backgroundColor = 'rgb(' + [85,228,47].join(",") + ')';
             document.getElementById("result").style.display = "inline-block";
             document.getElementById("result").innerHTML = "Nice job! Go and write your name on the board! :D<br>Don't spoil the answer!";
             document.getElementById("answer").className = "blur";
 
             // Entered the next riddle answer
-        } else if(equalsIgnoringCase(userAnswer.trim(), sec(nextRiddleAnswer))) {
-            document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
-            document.getElementById("result").style.display = "none";
-            document.getElementById("hallInput").style.display = "inline-block";
-            document.getElementById("answer").className = "blur";
+        } else {
+            if(equalsIgnoringCase(userAnswer.trim(), sec2)) {
+                document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
+                document.getElementById("result").style.display = "none";
+                document.getElementById("hallInput").style.display = "inline-block";
+                document.getElementById("answer").className = "blur";
 
-            gotNextRiddle = true;
+                gotNextRiddle = true;
 
             // Entered an incorrect answer
-        } else {
-            document.body.style.backgroundColor = 'rgb(' + [224,74,74].join(",") + ')';
-            document.getElementById("result").style.display = "inline-block";
-            document.getElementById("result").innerHTML = "Incorrect! Try again :)";
-            $( "#answerBox" ).effect("shake", {times:2, distance:10});
-            document.getElementById("answer").className = "";
+            } else {
+                document.body.style.backgroundColor = 'rgb(' + [224,74,74].join(",") + ')';
+                document.getElementById("result").style.display = "inline-block";
+                document.getElementById("result").innerHTML = "Incorrect! Try again :)";
+                $( "#answerBox" ).effect("shake", {times:2, distance:10});
+                document.getElementById("answer").className = "";
 
-            setTimeout(() => {
-                document.body.className = "slow";
-                document.body.style.backgroundColor = 'rgb(' + [233,233,233].join(",") + ')';
-            }, 500);
+                setTimeout(() => {
+                    document.body.className = "slow";
+                    document.body.style.backgroundColor = 'rgb(' + [233,233,233].join(",") + ')';
+                }, 500);
+            }
         }
     }
 }
@@ -222,7 +230,15 @@ function addToHall() {
  * @returns {boolean|*}     True if they are the same, false otherwise
  */
 function equalsIgnoringCase(text, other) {
-    return text.localeCompare(other, undefined, {sensitivity: 'base'}) === 0 || text.includes(other);
+    if(Array.isArray(other)) {
+        for(let i = 0; i < other.length; i++) {
+            if(text.localeCompare(other[i], undefined, {sensitivity: 'base'}) === 0 || text.includes(other[i])) {
+                return true;
+            }
+        }
+    } else {
+        return text.localeCompare(other, undefined, {sensitivity: 'base'}) === 0 || text.includes(other);
+    }
 }
 
 
