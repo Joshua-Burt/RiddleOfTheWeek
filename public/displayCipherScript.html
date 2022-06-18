@@ -35,7 +35,7 @@
     </div>
 
     <script>
-        fetch("scripts/riddleScript.js")
+        fetch("scripts/cipher.js")
             .then(response => response.text())
             .then(data => {
                 document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');
