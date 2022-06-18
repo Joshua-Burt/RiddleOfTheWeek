@@ -1,119 +1,47 @@
 <!DOCTYPE html>
 <html lang="ENG">
-<!--
-    Whatcha looking for?
-    You won't find the answers here anymore :)
--->
 <head>
-    <title>Riddle of the Week</title>
+    <title>Riddle Maker</title>
     <link rel="stylesheet" href="stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="scripts/cipher.js"></script>
+    <script src="scripts/sec.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        body {
-            transition: background-color 80ms cubic-bezier(1, 1, 1, 1);
-            transition-delay: 0s;
-        }
-
-        a:link, a:visited {
-            color: red;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        .unselectable {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 <div class="center">
     <script>
         let riddleList;
-        class Riddle {
-            constructor(riddle, answer) {
-                this.riddle = riddle;
-                this.answer = answer;
-            }
-        }
 
         fetch("rotw/riddles.txt")
             .then(response => response.text())
             .then(data => {
-                let input = antiCipher(data);
+                let input = sec(data);
                 riddleList = parseRiddles(input);
             });
 
-        function parseRiddles(data) {
-            let riddles = [];
-            let lines = data.split("\n");
-            for(let i = 0; i < lines.length; i++) {
-                if(lines[i].includes("~")) {
-                    let riddle = lines[i].substr(1);
-                    let answer = lines[i + 1].substr(1).trim();
-
-                    i += 1;
-
-                    let riddleObj = new Riddle(riddle, answer);
-                    riddles.push(riddleObj);
-                }
-            }
-            return riddles;
-        }
-
         function createRiddle() {
+            let newRiddle;
+
             if(document.getElementById("question").value !== "" && document.getElementById("answer").value !== "") {
                 let question = document.getElementById("question").value;
                 let answer = document.getElementById("answer").value;
-                riddleList[riddleList.length] = new Riddle(question, answer);
+                newRiddle = new Riddle(question, answer);
             }
 
-            document.getElementById("output").value = cipher(condenseRiddles(riddleList));
+            document.getElementById("output").value = cipher(condenseRiddles(riddleList) + newRiddle.toString(sec));
         }
 
         function condenseRiddles(riddles) {
             let string = "";
             for(let i = 0; i < riddles.length; i++) {
-                string += "~" + riddles[i].riddle + "\n=" + riddles[i].answer + "\n\n";
+                string += riddles[i].toString(sec);
             }
 
             return string;
         }
-
-		function cipher(inputStr) {
-			let values = "";
-			for(let i = 0; i < inputStr.length; i++) {
-				values += inputStr.charCodeAt(i) + " ";
-			}
-
-			return btoa(values.trimEnd());
-		}
-
-		function antiCipher(inputStr) {
-			let values = "";
-			let tokens = atob(inputStr).split(" ");
-
-			for(let i = 0; i < tokens.length; i++) {
-				values += String.fromCharCode(parseInt(tokens[i]));
-			}
-
-			return values;
-		}
     </script>
 
     <div id="riddleBox">
