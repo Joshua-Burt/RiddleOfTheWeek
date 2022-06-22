@@ -99,16 +99,23 @@ function checkAnswer() {
 
         // Entered the current riddle answer
         let sec1 = sec(currentRiddle.answer);
-        let sec2 = sec(nextRiddleAnswer);
+        let sec2 = null;
+        if(nextRiddleAnswer != null) {
+            sec2 = sec(nextRiddleAnswer);
+        }
         if(equalsIgnoringCase(userAnswer.trim(), sec1)) {
             document.body.style.backgroundColor = 'rgb(' + [85,228,47].join(",") + ')';
             document.getElementById("result").style.display = "inline-block";
             document.getElementById("result").innerHTML = "Nice job! Go and write your name on the board! :D<br>Don't spoil the answer!";
             document.getElementById("answer").className = "blur";
 
+            if(getRiddleNumber() === 25) {
+                window.open("/rotw/riddleanswers.html", '_blank').focus();
+            }
+
             // Entered the next riddle answer
         } else {
-            if(equalsIgnoringCase(userAnswer.trim(), sec2)) {
+            if(sec2 != null && equalsIgnoringCase(userAnswer.trim(), sec2)) {
                 document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
                 document.getElementById("result").style.display = "none";
                 document.getElementById("hallInput").style.display = "inline-block";
