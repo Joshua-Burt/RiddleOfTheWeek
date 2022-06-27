@@ -5,10 +5,11 @@
     <title>Riddle Script</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-    <script src="scripts/cipher.js" defer></script>
+<!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">-->
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>-->
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <script src="scripts/cipher.js" defer></script>-->
     <style>
         .hljs-ln-n {
             padding-right: 15px;
@@ -17,31 +18,102 @@
     </style>
 </head>
 <body>
-    <div>
-        <h2>This JavaScript Encrypts the Riddles</h2>
-        See if you can figure out how to decrypt them!
-        <br>Press <b>F12 > Console</b> to try out the different functions
-        <br><a href="rotw/riddles.txt" target="_blank">Encrypted riddles/answers here</a>
-        <p>
-            Try writing some code to reverse engineer the encryption
-            <br><a href="https://playcode.io/empty_javascript" target="_blank">Try testing it out in JavaScript here!</a>
-        </p>
-    </div>
+<canvas id="canvas" width="500" height="500"></canvas>
 
-    <div style="padding-top: 10px; text-align: left; padding-left: 15%; padding-right: 15%">
-        <pre>
-            <code class="language-js" id="codeDisplay"></code>
-        </pre>
-    </div>
+<script>
+    class Pattern {
+        constructor(values) {
+            this.values = values;
+        }
 
-    <script>
-        fetch("scripts/cipher.js")
+        getPixel(ctx, x, y) {
+            return this.values[((y * ctx.canvas.width) + x)]
+        }
+    }
+
+    let canvas = document.querySelector("#canvas");
+    let ctx = canvas.getContext("2d");
+    let pixelSize = 1;
+    let width = 131;
+    let height = 73;
+    let pattern = null;
+
+    setup();
+    // let sel = $('#canvas');
+
+    // sel.mousedown(function (mouseEvent) {
+    //     setSize(ctx, Math.round(1+ Math.random()*300), Math.round(1+Math.random()*300))
+    //     draw(ctx, pattern);
+    // });
+
+    function setSize(ctx, x, y) {
+        ctx.canvas.width = x * pixelSize;
+        ctx.canvas.height = y * pixelSize;
+    }
+
+    function setPattern(x) {
+        pattern = new Pattern(x);
+    }
+
+    function draw(ctx, pattern) {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        applyPattern(ctx, pattern);
+    }
+
+    function applyPattern(ctx, pattern) {
+        for(let i = 0; i < ctx.canvas.width / pixelSize; i++) {
+            for(let o = 0; o < ctx.canvas.height / pixelSize; o++) {
+                drawPixel(ctx, i, o, pattern.getPixel(ctx, i, o));
+            }
+        }
+    }
+
+    function drawPixel(ctx, x, y, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.rect(x*pixelSize, y*pixelSize, pixelSize, pixelSize);
+        ctx.fill()
+    }
+
+    async function setup() {
+        fetch("cipher2.txt")
             .then(response => response.text())
             .then(data => {
-                document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');
-                hljs.highlightAll();
-                hljs.initLineNumbersOnLoad();
+                let pat = data.split("\n");
+
+                setSize(ctx, 131, 73);
+                setPattern(pat);
+                draw(ctx, pattern);
             });
-    </script>
+    }
+</script>
+<!--    <div>-->
+<!--        <h2>This JavaScript Encrypts the Riddles</h2>-->
+<!--        See if you can figure out how to decrypt them!-->
+<!--        <br>Press <b>F12 > Console</b> to try out the different functions-->
+<!--        <br><a href="rotw/riddles.txt" target="_blank">Encrypted riddles/answers here</a>-->
+<!--        <p>-->
+<!--            Try writing some code to reverse engineer the encryption-->
+<!--            <br><a href="https://playcode.io/empty_javascript" target="_blank">Try testing it out in JavaScript here!</a>-->
+<!--        </p>-->
+<!--    </div>-->
+
+<!--    <div style="padding-top: 10px; text-align: left; padding-left: 15%; padding-right: 15%">-->
+<!--        <pre>-->
+<!--            <code class="language-js" id="codeDisplay"></code>-->
+<!--        </pre>-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        fetch("scripts/cipher.js")-->
+<!--            .then(response => response.text())-->
+<!--            .then(data => {-->
+<!--                document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');-->
+<!--                hljs.highlightAll();-->
+<!--                hljs.initLineNumbersOnLoad();-->
+<!--            });-->
+<!--    </script>-->
 </body>
 </html>

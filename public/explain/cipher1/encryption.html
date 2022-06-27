@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encryption 1 - Inverted Binary</title>
+    <link rel="stylesheet" href="../../stylesheet.css">
+    <link rel="stylesheet" href="../../lib/http_www.w3schools.com_w3css_4_w3.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../rotw/favicon.ico"/>
+    <script src="cipher.js"></script>
+    <style>
+        .main {
+            margin-left: 25%;
+            margin-top: 50px;
+            width: 50%;
+            text-align: left;
+        }
+
+        .quick {
+            margin-top: 25px;
+            margin-left: 25%;
+            width: 50%;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .word, .code, .base {
+            width: fit-content;
+            margin: auto;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1 style="margin-top: 25px">Inverted Binary</h1>
+
+<div class="quick">
+    <div id="word" class="w3-panel w3-sand w3-serif w3-border word"></div> (Original Word)
+    <h2>🢃</h2>
+    <div id="code" class="w3-panel w3-sand w3-serif w3-border code"></div> (Character Codes)
+    <h2>🢃</h2>
+    <div id="binary" class="w3-panel w3-sand w3-serif w3-border base"></div> (Binary)
+    <h2>🢃</h2>
+    <div id="padded" class="w3-panel w3-sand w3-serif w3-border base"></div> (Padding, add 0s to make each group 8 digits long)
+    <h2>🢃</h2>
+    <div id="flipped" class="w3-panel w3-sand w3-serif w3-border base"></div> (Bitflip, all 1s become 0s and all 0s become 1s)
+    <hr>
+</div>
+<div id="main" class="main">
+</div>
+
+
+<script>
+    let word = "Hello!"
+    let char = toCharCodeString(word);
+    let bin = "";
+    let padded = "";
+    let binaryFlip = "";
+
+    let array = char.split(" ");
+
+    for(let i = 0; i < array.length; i++) {
+        let binary = parseInt(array[i], 10).toString(2);
+
+        bin += binary + " ";
+
+        array[i] = zeroPad(binary, 8);
+        padded += array[i] + " ";
+
+        array[i] = bitFlip(array[i]);
+        binaryFlip += array[i] + " ";
+    }
+
+
+    document.getElementById("word").innerHTML = "<h2>" + word + "</h2>";
+    document.getElementById("code").innerHTML = "<h2>" + char + "</h2>";
+    document.getElementById("binary").innerHTML = "<h2>" + bin + "</h2>";
+    document.getElementById("padded").innerHTML = "<h2>" + padded + "</h2>";
+    document.getElementById("flipped").innerHTML = "<h2>" + binaryFlip + "</h2>";
+</script>
+</body>
+</html>

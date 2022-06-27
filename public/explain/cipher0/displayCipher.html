@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Riddle Script</title>
+  <link rel="stylesheet" href="../../stylesheet.css">
+  <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+  <script src="scripts/cipher.js" defer></script>
+  <style>
+    .hljs-ln-n {
+      padding-right: 15px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <h2>Cipher #0</h2>
+</div>
+
+<div style="padding-top: 10px; text-align: left; padding-left: 15%; padding-right: 15%">
+        <pre>
+            <code class="language-js" id="codeDisplay"></code>
+        </pre>
+</div>
+
+<script>
+  fetch("cipher.js")
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');
+            hljs.highlightAll();
+            hljs.initLineNumbersOnLoad();
+          });
+</script>
+</body>
+</html>

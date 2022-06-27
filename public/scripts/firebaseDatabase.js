@@ -21,7 +21,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
 let lists = [];
-let mostRecentEncryption = 1;
+let mostRecentEncryption = 2;
 let currentEncryptionNum = mostRecentEncryption;
 
 // Get list of names of code breakers
@@ -111,8 +111,8 @@ function displayExplanation() {
     if(currentEncryptionNum !== mostRecentEncryption) {
         document.getElementById("explanation").style.display = "inline"
 
-        if(UrlExists("/explain/encryption" + currentEncryptionNum + ".html")) {
-            document.getElementById("explainLink").innerHTML = "<a href='/explain/encryption" + currentEncryptionNum + ".html'>Here</a>";
+        if(UrlExists("/explain/cipher" + currentEncryptionNum + "/displayCipher.html")) {
+            document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/displayCipher.html'>Here</a>";
         } else {
             document.getElementById("explainLink").innerHTML = "Explanation coming soon™!"
         }
