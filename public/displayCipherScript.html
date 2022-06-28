@@ -19,6 +19,10 @@
 </head>
 <body>
 <canvas id="canvas" width="500" height="500"></canvas>
+<p></p>
+<input type="range" min="1" max="300" value="150" class="slider" id="a"><br>
+<input type="range" min="-150" max="150" value="0" class="slider" id="b"><br>
+<input type="range" min="-150" max="150" value="0" class="slider" id="c">
 
 <script>
     class Pattern {
@@ -27,15 +31,17 @@
         }
 
         getPixel(ctx, x, y) {
-            return this.values[((y * ctx.canvas.width) + x)]
+            return this.values[((y * ctx.canvas.width/pixelSize) + x)]
         }
     }
 
     let canvas = document.querySelector("#canvas");
     let ctx = canvas.getContext("2d");
-    let pixelSize = 1;
-    let width = 131;
-    let height = 73;
+    let pixelSize = 5;
+    let width = 180 + (Math.round(Math.random() * 10));
+    let height = 71;
+    let xShift = -150 + Math.round(Math.random() * 300);
+    let yShift = -50 + Math.round(Math.random() * 100);
     let pattern = null;
 
     setup();
@@ -65,7 +71,7 @@
     function applyPattern(ctx, pattern) {
         for(let i = 0; i < ctx.canvas.width / pixelSize; i++) {
             for(let o = 0; o < ctx.canvas.height / pixelSize; o++) {
-                drawPixel(ctx, i, o, pattern.getPixel(ctx, i, o));
+                drawPixel(ctx, i, o, pattern.getPixel(ctx, i - xShift, o - yShift));
             }
         }
     }
@@ -83,11 +89,38 @@
             .then(data => {
                 let pat = data.split("\n");
 
-                setSize(ctx, 131, 73);
+                setSize(ctx, width, height);
                 setPattern(pat);
                 draw(ctx, pattern);
             });
     }
+
+    $(document).ready(function() {
+        let a = document.getElementById("a");
+        a.value = width;
+
+        let b = document.getElementById("b");
+        b.value = xShift;
+
+        let c = document.getElementById("c");
+        c.value = yShift;
+
+        $("#a").on("change", function () {
+            width = parseInt($("#a").val());
+            setSize(ctx, width, height)
+            draw(ctx, pattern)
+        });
+
+        $("#b").on("change", function () {
+            xShift = parseInt($("#b").val());
+            draw(ctx, pattern)
+        });
+
+        $("#c").on("change", function () {
+            yShift = parseInt($("#c").val());
+            draw(ctx, pattern)
+        });
+    });
 </script>
 <!--    <div>-->
 <!--        <h2>This JavaScript Encrypts the Riddles</h2>-->

@@ -1,3 +1,5 @@
+import sjcl from 'sjcl'
+
 /**
  * Pads the input num with leading 0s
  * e.g. num = 5, places = 3
@@ -62,21 +64,40 @@ function toCharCodeString(inputStr) {
     return array.join(" ")
 }
 
+function getKey() {
+    let key = "";
+    let alphabet = "abcdefghijklmnopqrstuvwxyz"
+    for(let i = 0; i < 16; i++) {
+        key += alphabet[Math.round(i / 2)]
+    }
+
+    return key;
+}
+
 
 /**
  * @param inputStr      String to be encrypted
  * @returns {string}    Encrypted string
  */
-function cipher(inputStr) {
-    let values = toCharCodeString(inputStr);
-    let array = values.split(" ");
+async function cipher(inputStr) {
+    const myString = inputStr
+    const myBitArray = sjcl.hash.sha256.hash(myString)
+    const myHash = sjcl.codec.hex.fromBits(myBitArray)
 
-    for(let i = 0; i < array.length; i++) {
-        let binary = parseInt(array[i], 10).toString(2);
+    return myHash
+}
 
-        array[i] = zeroPad(binary, 8);
-        array[i] = bitFlip(array[i]);
-    }
+async function sha256(message) {
+    // encode as UTF-8
+    const msgBuffer = new TextEncoder().encode(message);
 
-    return array.join(" ").trimEnd();
+    // hash the message
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+    // convert ArrayBuffer to Array
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // convert bytes to hex string
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex.toString();
 }
