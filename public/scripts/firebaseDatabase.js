@@ -64,7 +64,6 @@ function getPropertyListsByEncryption(encryptionNum) {
         }
     }
 
-
     return [colorList, nameList];
 }
 

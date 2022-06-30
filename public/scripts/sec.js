@@ -3,30 +3,28 @@
  * @returns {string}    Decrypted string
  */
 function sec(input) {
-    let values;
-
-    if(Array.isArray(input)) {
-        values = separate(input)
-    } else {
-        values = "";
-        let tokens = input.split(" ");
-
-        for (let i = 0; i < tokens.length; i++) {
-            tokens[i] = bitFlip(tokens[i])
-            tokens[i] = parseInt(tokens[i], 2);
-
-            values += String.fromCharCode(tokens[i]);
-        }
-    }
-
-    return values;
+    let rev = reverseString(input);
+    let nonHex = fromHex(rev)
+    let codes = fromCharCode(nonHex);
+    return reverseString(codes);
 }
 
-function separate(array) {
-    let values = [];
-    for(let i = 0; i < array.length; i++) {
-        values.push(sec(array[i]));
+function fromHex(hex) {
+    let list = hex.split(" ");
+    let nonHex = "";
+    for(let i = 0; i < list.length; i++) {
+        nonHex += parseInt(list[i], 16).toString() + " ";
     }
 
-    return values;
+    return nonHex.trim();
+}
+
+function fromCharCode(inputStr) {
+    let outStr = "";
+    let list = inputStr.split(" ");
+    for(let i = 0; i < list.length; i++) {
+        outStr += String.fromCharCode(list[i])
+    }
+
+    return outStr;
 }
