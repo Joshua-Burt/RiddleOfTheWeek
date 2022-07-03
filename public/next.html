@@ -2,24 +2,49 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+        <script src="scripts/cipher.js" defer></script>
     <meta charset="UTF-8">
     <title>Next?</title>
+
+    <style>
+        .hljs-ln-n {
+            padding-right: 15px;
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
-<div class="center">
-    <b>Hint:</b><p>
-    AES Encryption<br>
-    ECB<br>
-    128<br>
-    Hex<p>
-    <div style="text-align: left;">
-        <code>var key = "";</code><br>
-        <code>var alphabet = "abcdefghijklmnopqrstuvwxyz"</code><p>
+<div class="center" style="width: 50%">
+        <div>
+            <h2>This JavaScript Encrypts the Riddles</h2>
+            See if you can figure out how to decrypt them!
+            <br>Press <b>F12 > Console</b> to try out the different functions
+            <br><a href="rotw/riddles.txt" target="_blank">Encrypted riddles/answers here</a>
+            <p>
+                Try writing some code to reverse engineer the encryption
+                <br><a href="https://playcode.io/empty_javascript" target="_blank">Try testing it out in JavaScript here!</a>
+            </p>
+        </div>
 
-        <code>for(var i = 0; i < 16; i++) {</code><br>
-        &emsp;<code>key += alphabet[Math.round(i / 2)]</code><br>
-        <code>}</code>
-    </div>
+        <div style="padding-top: 10px; text-align: left; padding-left: 15%; padding-right: 15%">
+            <pre>
+                <code class="language-js" id="codeDisplay"></code>
+            </pre>
+        </div>
+
+        <script>
+            fetch("scripts/cipher.js")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("codeDisplay").innerHTML = data.replace(/</g,'&lt;').replace(/>/g,'&gt');
+                    hljs.highlightAll();
+                    hljs.initLineNumbersOnLoad();
+                });
+        </script>
 </div>
 </body>
 </html>

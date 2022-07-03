@@ -110,8 +110,8 @@ function displayExplanation() {
     if(currentEncryptionNum !== mostRecentEncryption) {
         document.getElementById("explanation").style.display = "inline"
 
-        if(UrlExists("/explain/cipher" + currentEncryptionNum + "/displayCipher.html")) {
-            document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/displayCipher.html'>Here</a>";
+        if(UrlExists("/explain/cipher" + currentEncryptionNum + "/encryption.html")) {
+            document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/encryption.html'>Here</a>";
         } else {
             document.getElementById("explainLink").innerHTML = "Explanation coming soon™!"
         }
