@@ -105,7 +105,14 @@ function checkAnswer() {
         document.body.className = "fast";
 
         // Entered the current riddle answer
-        let sec1 = sec(currentRiddle.answer);
+
+
+        let sec1 = []
+
+        for(let i = 0; i < currentRiddle.answer.length; i++) {
+            sec1.push(sec(currentRiddle.answer[i]));
+        }
+
         let sec2 = null;
         if(nextRiddleAnswer != null) {
             sec2 = sec(nextRiddleAnswer);

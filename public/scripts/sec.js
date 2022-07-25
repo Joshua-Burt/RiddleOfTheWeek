@@ -3,10 +3,21 @@
  * @returns {string}    Decrypted string
  */
 function sec(input) {
-    let rev = reverseString(input);
-    let nonHex = fromHex(rev)
-    let codes = fromCharCode(nonHex);
-    return reverseString(codes);
+    let unencrypted = []
+    if(Array.isArray(input)) {
+        for(let i = 0; i < input.length; i++) {
+            let rev = reverseString(input);
+            let nonHex = fromHex(rev)
+            let codes = fromCharCode(nonHex);
+            unencrypted.push(codes)
+        }
+    } else {
+        let rev = reverseString(input);
+        let nonHex = fromHex(rev)
+        let codes = fromCharCode(nonHex);
+        unencrypted.push(codes)
+    }
+    return reverseString(unencrypted);
 }
 
 function fromHex(hex) {
