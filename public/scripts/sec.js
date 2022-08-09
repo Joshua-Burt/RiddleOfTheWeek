@@ -1,23 +1,29 @@
 /**
  * @param input      Encrypted string or array
- * @returns {string}    Decrypted string
+ * @returns {array<string>}    Decrypted string
  */
 function sec(input) {
     let unencrypted = []
+
     if(Array.isArray(input)) {
         for(let i = 0; i < input.length; i++) {
-            let rev = reverseString(input);
+            let rev = reverseString(input[i]);
             let nonHex = fromHex(rev)
             let codes = fromCharCode(nonHex);
-            unencrypted.push(codes)
+            unencrypted.push(reverseString(codes))
         }
     } else {
         let rev = reverseString(input);
         let nonHex = fromHex(rev)
         let codes = fromCharCode(nonHex);
-        unencrypted.push(codes)
+        unencrypted.push(reverseString(codes))
     }
-    return reverseString(unencrypted);
+
+    // for(let i = 0; i < unencrypted.length; i++) {
+    //     unencrypted[i] = reverseString(unencrypted[i]);
+    // }
+
+    return unencrypted;
 }
 
 function fromHex(hex) {

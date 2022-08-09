@@ -67,7 +67,7 @@ function swearFilter(string) {
 function parseRiddles(data) {
     // Split the decrypted riddles into an array
     let riddles = [];
-    let lines = data.split("\n");
+    let lines = data[0].split("\n");
 
     // Go through each string in the array
     // Strings starting with ~ are a riddle question
