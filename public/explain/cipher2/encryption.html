@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encryption 2 - Reversed-Reversed HEX Codes</title>
+    <link rel="stylesheet" href="../../stylesheet.css">
+    <link rel="stylesheet" href="../../lib/http_www.w3schools.com_w3css_4_w3.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../rotw/favicon.ico"/>
+    <script src="cipher.js"></script>
+    <style>
+        .main {
+            margin-left: 25%;
+            margin-top: 50px;
+            width: 50%;
+            text-align: left;
+        }
+
+        .quick {
+            margin-top: 25px;
+            margin-left: 25%;
+            width: 50%;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .word, .code, .base {
+            width: fit-content;
+            margin: auto;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1 style="margin-top: 25px">Reversed-Reversed HEX Codes</h1>
+
+<div class="quick">
+    <div id="word" class="w3-panel w3-sand w3-serif w3-border word"></div> (Original Word)
+    <h2>🢃</h2>
+    <div id="rev" class="w3-panel w3-sand w3-serif w3-border code"></div> (Reverse Word)
+    <h2>🢃</h2>
+    <div id="hex" class="w3-panel w3-sand w3-serif w3-border base"></div> (Convert to <a href="https://simple.wikipedia.org/wiki/Hexadecimal" target="_blank">HEX codes</a>)
+    <h2>🢃</h2>
+    <div id="revHex" class="w3-panel w3-sand w3-serif w3-border base"></div> (Reverse HEX)
+    <hr>
+</div>
+<div id="main" class="main">
+    <a href="displayCipher.html">See code here!</a>
+</div>
+
+
+<script>
+    let word = "Hello!"
+    let revWord = reverseString(word);
+    let hex = toHex(revWord);
+    let revHex = reverseString(hex);
+
+    document.getElementById("word").innerHTML = "<h2>" + word + "</h2>";
+    document.getElementById("rev").innerHTML = "<h2>" + revWord + "</h2>";
+    document.getElementById("hex").innerHTML = "<h2>" + hex + "</h2>";
+    document.getElementById("revHex").innerHTML = "<h2>" + revHex + "</h2>";
+</script>
+</body>
+</html>
