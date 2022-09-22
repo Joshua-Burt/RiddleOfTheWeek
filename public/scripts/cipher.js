@@ -1,25 +1,13 @@
 /**
  *
- * @param string        String containing text
- * @returns {string}    txet gniniatnoc gnirtS
+ * @param char          A single letter
+ * @returns {string}    Encrypted letter
  */
-function reverseString(string) {
-    string = string.toString();
-    return string.split("").reverse().join("");
-}
+function getLetter(char) {
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
+    let cipher_alphabet = "codingABCDEFGHIJKLMNOPQRSTUVWXYZ rulesabfhjkmpqtvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
 
-
-/**
- *
- * @param str           String containing text
- * @returns {string}    String encoded in Hexadecimal
- */
-function toHex(str) {
-    let result = '';
-    for (let i = 0; i < str.length; i++) {
-        result += str.charCodeAt(i).toString(16) + " ";
-    }
-    return result.trim();
+    return cipher_alphabet.charAt(alphabet.indexOf(char));
 }
 
 /**
@@ -27,8 +15,13 @@ function toHex(str) {
  * @returns {string}    Encrypted string
  */
 function cipher(inputStr) {
-    let revStr = reverseString(inputStr);
-    let hex = toHex(revStr);
+    let finished_cipher = "";
 
-    return reverseString(hex);
+    inputStr = inputStr.replace(/[\r\n]/gm, '_')
+
+    for(let i = 0; i < inputStr.length; i++) {
+        finished_cipher += getLetter(inputStr.charAt(i));
+    }
+
+    return finished_cipher;
 }
