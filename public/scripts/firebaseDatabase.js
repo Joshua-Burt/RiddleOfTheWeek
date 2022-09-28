@@ -3,7 +3,6 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-a
 import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
 import {child, get, getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
-
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCRHo5QphDs9HQn2eJsQjugnE1gTVkiA6E",
