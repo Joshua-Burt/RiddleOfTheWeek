@@ -4,10 +4,11 @@
  */
 function sec(input) {
     let unencrypted = []
-    let letters = ""
+
 
     if(Array.isArray(input)) {
         for(let i = 0; i < input.length; i++) {
+            let letters = ""
 
             for(let j = 0; j < input[i].length; j++) {
                 letters += getAntiLetter(input[i].charAt(j));
@@ -15,6 +16,8 @@ function sec(input) {
             unencrypted.push(letters);
         }
     } else {
+        let letters = ""
+
         for(let i = 0; i < input.length; i++) {
             letters += getAntiLetter(input.charAt(i));
         }

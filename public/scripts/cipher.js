@@ -17,8 +17,10 @@ function getLetter(char) {
 function cipher(inputStr) {
     let finished_cipher = "";
 
+    // Replace any \n or \r with _
     inputStr = inputStr.replace(/[\r\n]/gm, '_')
 
+    // Encrypt letter by letter
     for(let i = 0; i < inputStr.length; i++) {
         finished_cipher += getLetter(inputStr.charAt(i));
     }
