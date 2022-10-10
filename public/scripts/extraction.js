@@ -77,7 +77,8 @@ function parseRiddles(data) {
             // Once the ~ has been found, the line after is always the =
             let riddle;
             // Encrypt next weeks riddle
-            if(i === getRiddleNumber() + 1) {
+            //
+            if(riddles.length >= getRiddleNumber() + 1) {
                 riddle = cipher(lines[i].substr(1));
             } else {
                 riddle = lines[i].substr(1);
