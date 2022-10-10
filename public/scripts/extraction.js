@@ -75,7 +75,14 @@ function parseRiddles(data) {
     for(let i = 0; i < lines.length; i++) {
         if(lines[i].includes("~")) {
             // Once the ~ has been found, the line after is always the =
-            let riddle = lines[i].substr(1);
+            let riddle;
+            // Encrypt next weeks riddle
+            if(i === getRiddleNumber() + 1) {
+                riddle = cipher(lines[i].substr(1));
+            } else {
+                riddle = lines[i].substr(1);
+            }
+
             let answer = lines[i + 1].substr(1).trim().split(",");
 
             for(let j = 0; j < answer.length; j++) {
