@@ -197,7 +197,7 @@ function getRiddleNumber() {
 function addToHall() {
     let name = document.getElementById("name").value
 
-    if(gotNextRiddle && name.length > 0 && document.getElementById("confirmNoCheat").checked) {
+    if(gotNextRiddle && name.length > 0 && name.length <= 32 && document.getElementById("confirmNoCheat").checked) {
         let color = document.getElementById("inputColor").value
 
         window.writeUserData(name, color);
