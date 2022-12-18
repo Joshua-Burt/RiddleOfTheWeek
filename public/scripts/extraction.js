@@ -111,7 +111,8 @@ function getRiddle(riddleNumber) {
 function checkAnswer() {
     let userAnswer = document.getElementById("answer").value;
 
-    if(userAnswer.length <= 0) {
+    // Correct answers will never be 0 characters or longer than 30 characters
+    if(userAnswer.length <= 0 || userAnswer.length >= 30) {
         return;
     }
 
