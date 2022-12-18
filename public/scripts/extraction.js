@@ -1,6 +1,4 @@
 let riddles;
-let currentRiddle;
-let nextRiddleAnswer;
 let gotNextRiddle = false;
 
 
@@ -38,25 +36,26 @@ fetch("rotw/riddles.txt")
                 document.getElementById("riddle").innerHTML = "Josh needs to add more riddles :)"
             } else {
                 // Current Riddle
-                currentRiddle = riddles[riddleNumber];
+                let currentRiddle = getRiddle(riddleNumber);
                 document.getElementById("riddle").innerHTML = currentRiddle.riddle;
 
                 // Last Riddle
-                let lastRiddle = riddles[lastRiddleNumber];
+                let lastRiddle = getRiddle(lastRiddleNumber);
                 document.getElementById("last").innerHTML = "<h3>Last week's riddle & answer:</h3><br><i>" +
                     lastRiddle.riddle + "</i><br>" + "<b>" + sec(lastRiddle.answer) + "</b>";
-
-                // Next Riddle
-                if (riddleNumber + 1 < riddles.length) {
-                    nextRiddleAnswer = riddles[riddleNumber + 1].answer;
-                }
             }
         }
     });
 
-//TODO: Implement swear filter
 function swearFilter(string) {
+    let words;
 
+    fetch("rotw/words.txt")
+    .then(response => response.text())
+    .then(data => {
+        words = data.split("\n\r");
+        return words.includes(string)
+    });
 }
 
 /**
@@ -75,9 +74,9 @@ function parseRiddles(data) {
     for(let i = 0; i < lines.length; i++) {
         if(lines[i].includes("~")) {
             // Once the ~ has been found, the line after is always the =
+
             let riddle;
             // Encrypt next weeks riddle
-            //
             if(riddles.length >= getRiddleNumber() + 1) {
                 riddle = cipher(lines[i].substr(1));
             } else {
@@ -101,6 +100,10 @@ function parseRiddles(data) {
     return riddles;
 }
 
+function getRiddle(riddleNumber) {
+    return riddles[riddleNumber];
+}
+
 
 /**
  * Confirm if the user has gotten the correct answer and display the result
@@ -108,59 +111,56 @@ function parseRiddles(data) {
 function checkAnswer() {
     let userAnswer = document.getElementById("answer").value;
 
-    if(userAnswer.length > 0) {
-        // Set the delay for the background colour to fast
-        document.body.className = "fast";
+    if(userAnswer.length <= 0) {
+        return;
+    }
 
-        // Entered the current riddle answer
+    // Set the delay for the background colour to fast
+    document.body.className = "fast";
 
+    let sec1 = []
 
-        let sec1 = []
+    for(let i = 0; i < getRiddle(getRiddleNumber()).answer.length; i++) {
+        sec1.push(sec(getRiddle(getRiddleNumber()).answer[i]));
+    }
 
-        for(let i = 0; i < currentRiddle.answer.length; i++) {
-            sec1.push(sec(currentRiddle.answer[i]));
-        }
+    let sec2 = [];
+    for(let i = 0; i < getRiddle(getRiddleNumber() + 1).answer.length; i++) {
+        sec2.push(sec(getRiddle(getRiddleNumber() + 1).answer[i]));
+    }
 
-        let sec2 = null;
-        if(nextRiddleAnswer != null) {
-            sec2 = sec(nextRiddleAnswer);
-        }
-        if(equalsIgnoringCase(userAnswer.trim(), sec1)) {
-            document.body.style.backgroundColor = 'rgb(' + [85,228,47].join(",") + ')';
-            document.getElementById("result").style.display = "inline-block";
-            document.getElementById("result").innerHTML = "Nice job! Go and write your name on the board! :D<br>Don't spoil the answer!";
+    // Entered the current riddle answer
+    if(equalsIgnoringCase(userAnswer.trim(), sec1)) {
+        document.body.style.backgroundColor = 'rgb(' + [85,228,47].join(",") + ')';
+        document.getElementById("result").style.display = "inline-block";
+        document.getElementById("result").innerHTML = "Nice job! Go and write your name on the board! :D<br>Don't spoil the answer!";
+        document.getElementById("answer").className = "blur";
+
+        // Entered the next riddle answer
+    } else {
+        if(equalsIgnoringCase(userAnswer.trim(), sec2)) {
+            document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
+            document.getElementById("result").style.display = "none";
+            document.getElementById("hallInput").style.display = "inline-block";
             document.getElementById("answer").className = "blur";
 
-            // Ricky
-            if(getRiddleNumber() === 25) {
-                window.open("/rotw/riddleanswers.html", '_blank').focus();
-            }
+            gotNextRiddle = true;
 
-            // Entered the next riddle answer
+            // Entered an incorrect answer
         } else {
-            if(sec2 != null && equalsIgnoringCase(userAnswer.trim(), sec2)) {
-                document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
-                document.getElementById("result").style.display = "none";
-                document.getElementById("hallInput").style.display = "inline-block";
-                document.getElementById("answer").className = "blur";
+            document.body.style.backgroundColor = 'rgb(' + [224,74,74].join(",") + ')';
+            document.getElementById("result").style.display = "inline-block";
+            document.getElementById("result").innerHTML = "Incorrect! Try again :)";
+            $( "#answerBox" ).effect("shake", {times:2, distance:10});
+            document.getElementById("answer").className = "";
 
-                gotNextRiddle = true;
-
-                // Entered an incorrect answer
-            } else {
-                document.body.style.backgroundColor = 'rgb(' + [224,74,74].join(",") + ')';
-                document.getElementById("result").style.display = "inline-block";
-                document.getElementById("result").innerHTML = "Incorrect! Try again :)";
-                $( "#answerBox" ).effect("shake", {times:2, distance:10});
-                document.getElementById("answer").className = "";
-
-                setTimeout(() => {
-                    document.body.className = "slow";
-                    document.body.style.backgroundColor = 'rgb(' + [233,233,233].join(",") + ')';
-                }, 500);
-            }
+            setTimeout(() => {
+                document.body.className = "slow";
+                document.body.style.backgroundColor = 'rgb(' + [233,233,233].join(",") + ')';
+            }, 500);
         }
     }
+
 }
 
 /**
