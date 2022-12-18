@@ -1,5 +1,6 @@
 let riddles;
 let gotNextRiddle = false;
+window.gotNextRiddle = gotNextRiddle;
 
 
 /**
@@ -119,7 +120,7 @@ function checkAnswer() {
     // Set the delay for the background colour to fast
     document.body.className = "fast";
 
-    let sec1 = []
+    let sec1 = [];
 
     for(let i = 0; i < getRiddle(getRiddleNumber()).answer.length; i++) {
         sec1.push(sec(getRiddle(getRiddleNumber()).answer[i]));
@@ -146,6 +147,7 @@ function checkAnswer() {
             document.getElementById("answer").className = "blur";
 
             gotNextRiddle = true;
+            window.gotNextRiddle = gotNextRiddle;
 
             // Entered an incorrect answer
         } else {

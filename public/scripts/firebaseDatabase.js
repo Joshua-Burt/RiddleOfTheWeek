@@ -112,7 +112,7 @@ function displayExplanation() {
         if(UrlExists("/explain/cipher" + currentEncryptionNum + "/encryption.html")) {
             document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/encryption.html'>Here</a>";
         } else {
-            document.getElementById("explainLink").innerHTML = "Explanation coming soon™!"
+            document.getElementById("explainLink").innerHTML = "Explanation coming Soon™!"
         }
     } else {
         document.getElementById("explanation").style.display = "none"
@@ -141,15 +141,17 @@ function doesPageExist(url) {
 }
 
 function writeUserData(name, color) {
-    const db = getDatabase();
+    if(window.gotNextRiddle) {
+        const db = getDatabase();
 
-    let regex = /(<([^>]+)>)/ig
-    let result = name.replace(regex, "");
+        let regex = /(<([^>]+)>)/ig
+        let result = name.replace(regex, "");
 
-    set(ref(db, 'codeBreakers/' + mostRecentEncryption + "/" + Date.now()), {
-        color: color,
-        name: result
-    });
+        set(ref(db, 'codeBreakers/' + mostRecentEncryption + "/" + Date.now()), {
+            color: color,
+            name: result
+        });
+    }
 }
 
 window.writeUserData = writeUserData;
