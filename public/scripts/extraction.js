@@ -121,14 +121,17 @@ function checkAnswer() {
     document.body.className = "fast";
 
     let sec1 = [];
+    let sec2 = [];
 
     for(let i = 0; i < getRiddle(getRiddleNumber()).answer.length; i++) {
         sec1.push(sec(getRiddle(getRiddleNumber()).answer[i]));
     }
 
-    let sec2 = [];
-    for(let i = 0; i < getRiddle(getRiddleNumber() + 1).answer.length; i++) {
-        sec2.push(sec(getRiddle(getRiddleNumber() + 1).answer[i]));
+
+    if(getRiddle(getRiddleNumber() + 1) != null) {
+        for(let i = 0; i < getRiddle(getRiddleNumber() + 1).answer.length; i++) {
+            sec2.push(sec(getRiddle(getRiddleNumber() + 1).answer[i]));
+        }
     }
 
     // Entered the current riddle answer

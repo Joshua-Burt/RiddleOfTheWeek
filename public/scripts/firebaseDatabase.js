@@ -141,17 +141,48 @@ function doesPageExist(url) {
 }
 
 function writeUserData(name, color) {
-    if(window.gotNextRiddle) {
-        const db = getDatabase();
+    if(!fromConsole()) {
+        if(window.gotNextRiddle) {
+            const db = getDatabase();
 
-        let regex = /(<([^>]+)>)/ig
-        let result = name.replace(regex, "");
+            let regex = /(<([^>]+)>)/ig
+            let result = name.replace(regex, "");
 
-        set(ref(db, 'codeBreakers/' + mostRecentEncryption + "/" + Date.now()), {
-            color: color,
-            name: result
-        });
+            set(ref(db, 'codeBreakers/' + mostRecentEncryption + "/" + Date.now()), {
+                color: color,
+                name: result
+            });
+        }
     }
+}
+
+function fromConsole()
+{
+    var stack;
+    try
+    {
+        // Throwing the error for Safari's sake, in Chrome and Firefox
+        // var stack = new Error().stack; is sufficient.
+        throw new Error();
+    }
+    catch (e)
+    {
+        stack = e.stack;
+    }
+    if (!stack)
+        return false;
+
+    var lines = stack.split("\n");
+    for (var i = 0; i < lines.length; i++)
+    {
+        if (lines[i].indexOf("at Object.InjectedScript.") >= 0)
+            return true;   // Chrome console
+        if (lines[i].indexOf("@debugger eval code") == 0)
+            return true;   // Firefox console
+        if (lines[i].indexOf("_evaluateOn") == 0)
+            return true;   // Safari console
+    }
+    return false;
 }
 
 window.writeUserData = writeUserData;
