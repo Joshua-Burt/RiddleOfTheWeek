@@ -165,6 +165,7 @@ function fromConsole() {
     } catch(e) {
         stack = e.stack;
     }
+
     if(!stack)
         return false;
 
