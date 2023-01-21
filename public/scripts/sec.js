@@ -1,44 +1,46 @@
 /**
- * @param input      Encrypted string or array
+ * @param inputStr      Encrypted string or array
  * @returns {array<string>}    Decrypted string
  */
-function sec(input) {
-    let unencrypted = []
-
-
-    if(Array.isArray(input)) {
-        for(let i = 0; i < input.length; i++) {
-            let letters = ""
-
-            for(let j = 0; j < input[i].length; j++) {
-                letters += getAntiLetter(input[i].charAt(j));
-            }
-            unencrypted.push(letters);
+function sec(inputStr) {
+    let decrypted = [];
+    if(Array.isArray(inputStr)) {
+        for(let i = 0; i < inputStr.length; i++) {
+            decrypted.push(decrypt(inputStr[i]));
         }
     } else {
-        let letters = ""
-
-        for(let i = 0; i < input.length; i++) {
-            letters += getAntiLetter(input.charAt(i));
-        }
-        unencrypted.push(letters);
+        decrypted.push(decrypt(inputStr));
     }
 
-    return unencrypted;
+    return decrypted;
 }
 
-/**
- *
- * @param char          A single letter
- * @returns {string}    Encrypted letter
- */
-function getAntiLetter(char) {
-    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
-    let cipher_alphabet = "codingABCDEFGHIJKLMNOPQRSTUVWXYZ rulesabfhjkmpqtvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
+function decrypt(inputStr) {
+    let decrypted = "";
+    for(let i = 0; i < inputStr.length; i++){
+        let currentLetter = inputStr.charAt(i);
 
-    if(char === "_") {
-        return "\n";
+        if(currentLetter === "\\" && inputStr.charAt(i + 1) === "n") {
+            decrypted += "\n";
+            i++;
+        } else if(alphabet.indexOf(currentLetter) !== -1) {
+            decrypted += antiShiftLetter(currentLetter);
+        } else {
+            decrypted += currentLetter;
+        }
+    }
+    return decrypted;
+}
+
+
+
+function antiShiftLetter(letter) {
+    let positionInAlphabet = alphabet.indexOf(letter);
+    let newPosition = positionInAlphabet - 10;
+
+    if(newPosition < 0) {
+        newPosition += alphabet.length;
     }
 
-    return alphabet.charAt(cipher_alphabet.indexOf(char));
+    return alphabet.charAt(newPosition);
 }

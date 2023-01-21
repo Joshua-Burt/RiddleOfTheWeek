@@ -1,29 +1,30 @@
-/**
- *
- * @param char          A single letter
- * @returns {string}    Encrypted letter
- */
-function getLetter(char) {
-    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
-    let cipher_alphabet = "codingABCDEFGHIJKLMNOPQRSTUVWXYZ rulesabfhjkmpqtvwxyz!~=\\\";\'<>,.1234567890+-:()?_"
-
-    return cipher_alphabet.charAt(alphabet.indexOf(char));
-}
+let alphabet = "qwertyuiopasdfghjkl;zxcvbnm,./QWERTYUIOPASDFGHJKL;ZXCVBNM<>?"
 
 /**
  * @param inputStr      String to be encrypted
  * @returns {string}    Encrypted string
  */
 function cipher(inputStr) {
-    let finished_cipher = "";
+    let encrypted = "";
+    for(let i = 0; i < inputStr.length; i++){
+        let currentLetter = inputStr.charAt(i);
 
-    // Replace any \n or \r with _
-    inputStr = inputStr.replace(/[\r\n]/gm, '_')
-
-    // Encrypt letter by letter
-    for(let i = 0; i < inputStr.length; i++) {
-        finished_cipher += getLetter(inputStr.charAt(i));
+        if(currentLetter === "\n") {
+            encrypted += "\n";
+        } else if(alphabet.indexOf(currentLetter) !== -1) {
+            encrypted += shiftLetter(currentLetter);
+        } else {
+            encrypted += currentLetter;
+        }
     }
+    return encrypted;
+}
 
-    return finished_cipher;
+
+function shiftLetter(letter) {
+    let positionInAlphabet = alphabet.indexOf(letter);
+
+    let newPosition = (positionInAlphabet + 10) % alphabet.length;
+
+    return alphabet.charAt(newPosition);
 }
