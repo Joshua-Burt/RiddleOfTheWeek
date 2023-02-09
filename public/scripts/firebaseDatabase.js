@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
 let lists = [];
-let mostRecentEncryption = 3;
+let mostRecentEncryption = 4;
 let currentEncryptionNum = mostRecentEncryption;
 
 // Get list of names of code breakers
