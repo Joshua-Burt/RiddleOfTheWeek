@@ -13,6 +13,10 @@
 </head>
 <body>
 <div class="center">
+    Note: This is does not update the riddles displayed on the website.
+        <br>You must update riddles.txt to the results in the "Riddle String" box
+        <br>then push it using "firebase deploy" for the riddles to be uploaded.
+    <p>
     <script>
         let riddleList;
 
@@ -26,6 +30,7 @@
 
 		function tableCreate() {
 			const body = document.body, tbl = document.createElement('table');
+			tbl.setAttribute("id", "table");
 			tbl.style.width = '90%';
 			tbl.style.height = '300px';
 			tbl.style.border = '1px solid black';
@@ -47,6 +52,7 @@
 						td.appendChild(document.createTextNode(riddleList[(i * colLength) + j].riddle));
 					} else {
                     	createInputBox(td);
+                    	td.setAttribute("id", "currentInput");
                     	break;
                     }
 				}
@@ -69,6 +75,11 @@
             }
 
             document.getElementById("output").value = cipher(condenseRiddles(riddleList) + newRiddle.toString(sec));
+			riddleList.push(newRiddle);
+
+			// Refresh the table
+			document.getElementById("table").remove();
+			tableCreate();
         }
 
         // Takes the array of all the riddles and "condenses" it into a string
@@ -102,27 +113,8 @@
 
     <div id="riddleBox">
 
-        <div style="text-align: right">
-            <div>
-                <label for="question">Question:</label>
-                <input type="text" id="question"/>
-            </div>
-            <br>
-            <div>
-                <label for="answer">Answer:</label>
-                <input type="text" id="answer"/>
-            </div>
-        </div>
-
-        <p>
-            <label for="question">Output:</label>
-            <br>
-                <input type="text" id="output"/>
-            </br>
-        </p>
-            <button type="submit" onclick="createRiddle()">Submit</button>
-
-        <div id="result" style="display: none"></div>
+        <label for="output">Riddle String:</label>
+        <input type="text" id="output" readonly/>
     </div>
 </div>
 </body>
