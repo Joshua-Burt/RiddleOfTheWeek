@@ -13,7 +13,7 @@ class Riddle {
     }
 
     toString(key) {
-        return this.riddle + "\n=" + key(this.answer) + "\n\n";
+        return "~" + this.riddle + "\n=" + key(this.answer) + "\n\n";
     }
 }
 

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/cipher.js"></script>
+    <script src="scripts/extraction.js"></script>
     <script src="scripts/sec.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="rotw/favicon.ico"/>
     <meta charset="UTF-8"/>
@@ -28,12 +29,17 @@
             if(document.getElementById("question").value !== "" && document.getElementById("answer").value !== "") {
                 let question = document.getElementById("question").value;
                 let answer = document.getElementById("answer").value;
+
+                // Encrypt the answer before assigning to a Riddle object
+                answer = cipher(answer);
+
                 newRiddle = new Riddle(question, answer);
             }
 
             document.getElementById("output").value = cipher(condenseRiddles(riddleList) + newRiddle.toString(sec));
         }
 
+        // Takes the array of all the riddles and "condenses" it into a string
         function condenseRiddles(riddles) {
             let string = "";
             for(let i = 0; i < riddles.length; i++) {
