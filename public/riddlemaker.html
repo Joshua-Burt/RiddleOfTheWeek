@@ -21,14 +21,46 @@
             .then(data => {
                 let input = sec(data);
                 riddleList = parseRiddles(input);
+                tableCreate();
             });
 
-        function createRiddle() {
+		function tableCreate() {
+			const body = document.body, tbl = document.createElement('table');
+			tbl.style.width = '90%';
+			tbl.style.height = '300px';
+			tbl.style.border = '1px solid black';
+
+			let colLength = 7;
+			let rowLength = 8;
+
+			for (let i = 0; i < rowLength; i++) {
+				if((i * colLength) > riddleList.length) {
+					break;
+				}
+
+				const tr = tbl.insertRow();
+				for (let j = 0; j < colLength; j++) {
+					const td = tr.insertCell();
+					td.style.border = '1px solid black';
+
+                    if((i * colLength) + j < riddleList.length) {
+						td.appendChild(document.createTextNode(riddleList[(i * colLength) + j].riddle));
+					} else {
+                    	createInputBox(td);
+                    	break;
+                    }
+				}
+			}
+			body.appendChild(tbl);
+		}
+
+
+		function createRiddle() {
             let newRiddle;
 
-            if(document.getElementById("question").value !== "" && document.getElementById("answer").value !== "") {
-                let question = document.getElementById("question").value;
-                let answer = document.getElementById("answer").value;
+            if(document.getElementById("riddleInput").value !== "" && document.getElementById("answerInput").value !== "") {
+                let question = document.getElementById("riddleInput").value;
+                let answer = document.getElementById("answerInput").value;
 
                 // Encrypt the answer before assigning to a Riddle object
                 answer = cipher(answer);
@@ -47,6 +79,24 @@
             }
 
             return string;
+        }
+
+        function createInputBox(td) {
+			let riddleInput = document.createElement("input");
+            let answerInput = document.createElement("input");
+            let submit = document.createElement("button");
+
+            riddleInput.setAttribute("id", "riddleInput");
+            answerInput.setAttribute("id", "answerInput");
+            submit.setAttribute("type", "submit");
+            submit.setAttribute("onclick", "createRiddle()");
+            submit.innerText = "Submit";
+
+			td.appendChild(riddleInput);
+			td.appendChild(document.createElement("p"))
+			td.appendChild(answerInput);
+			td.appendChild(document.createElement("p"))
+			td.appendChild(submit);
         }
     </script>
 

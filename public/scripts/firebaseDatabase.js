@@ -18,10 +18,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
 const db = getDatabase();
 let lists = [];
 let mostRecentEncryption = 4;
 let currentEncryptionNum = mostRecentEncryption;
+
 
 // Get list of names of code breakers
 const dbRef = ref(db);
@@ -105,6 +107,7 @@ function nextCodeBreakers() {
     displayExplanation();
 }
 
+
 function displayExplanation() {
     if(currentEncryptionNum !== mostRecentEncryption) {
         document.getElementById("explanation").style.display = "inline"
@@ -119,6 +122,7 @@ function displayExplanation() {
     }
 }
 
+
 function UrlExists(url) {
     let http = new XMLHttpRequest();
     http.open('HEAD', url, false);
@@ -126,19 +130,6 @@ function UrlExists(url) {
     return http.status !== 404;
 }
 
-function doesPageExist(url) {
-    return new File(url).exists();
-    // return $.ajax({
-    //     type: 'HEAD',
-    //     url: url,
-    //     success: function () {
-    //         return true;
-    //     },
-    //     error: function () {
-    //         return false;
-    //     }
-    // });
-}
 
 function writeUserData(name, color) {
     if(!fromConsole()) {
