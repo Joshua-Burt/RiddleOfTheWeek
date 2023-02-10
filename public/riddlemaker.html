@@ -51,13 +51,25 @@
     </script>
 
     <div id="riddleBox">
-        <label for="answer">Question / Answer:</label>
-        <br>
-        <input type="text" id="question"/>
-        <input type="text" id="answer"/>
+
+        <div style="text-align: right">
+            <div>
+                <label for="question">Question:</label>
+                <input type="text" id="question"/>
+            </div>
+            <br>
+            <div>
+                <label for="answer">Answer:</label>
+                <input type="text" id="answer"/>
+            </div>
+        </div>
+
         <p>
-        <input type="text" id="output"/>
-        <p>
+            <label for="question">Output:</label>
+            <br>
+                <input type="text" id="output"/>
+            </br>
+        </p>
             <button type="submit" onclick="createRiddle()">Submit</button>
 
         <div id="result" style="display: none"></div>
