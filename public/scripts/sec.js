@@ -20,8 +20,8 @@ function decrypt(inputStr) {
     for(let i = 0; i < inputStr.length; i++){
         let currentLetter = inputStr.charAt(i);
 
-        if(currentLetter === "\\" && inputStr.charAt(i + 1) === "n") {
-            decrypted += "\n";
+        if(currentLetter === separator) {
+            decrypted += separator;
             i++;
         } else if(alphabet.indexOf(currentLetter) !== -1) {
             decrypted += antiShiftLetter(currentLetter);

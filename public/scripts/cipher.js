@@ -9,8 +9,8 @@ function cipher(inputStr) {
     for(let i = 0; i < inputStr.length; i++){
         let currentLetter = inputStr.charAt(i);
 
-        if(currentLetter === "\n") {
-            encrypted += "\n";
+        if(currentLetter === separator) {
+            encrypted += separator;
         } else if(alphabet.indexOf(currentLetter) !== -1) {
             encrypted += shiftLetter(currentLetter);
         } else {

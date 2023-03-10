@@ -45,10 +45,20 @@
 
 				const tr = tbl.insertRow();
 				for (let j = 0; j < colLength; j++) {
+					let riddleNumber = (i * colLength) + j;
+
+
 					const td = tr.insertCell();
 					td.style.border = '1px solid black';
 
-                    if((i * colLength) + j < riddleList.length) {
+                    if(riddleNumber < riddleList.length) {
+                        let riddle = riddleList[riddleNumber];
+
+                    	if(riddleNumber > getRiddleNumber()) {
+                    		riddle.riddle = sec(riddle.riddle);
+                    		riddle.answer = sec(riddle.answer);
+                        }
+
 						td.appendChild(document.createTextNode(riddleList[(i * colLength) + j].riddle));
 					} else {
                     	createInputBox(td);
@@ -74,8 +84,10 @@
                 newRiddle = new Riddle(question, answer);
             }
 
-            document.getElementById("output").value = cipher(condenseRiddles(riddleList) + newRiddle.toString(sec));
+
 			riddleList.push(newRiddle);
+
+            document.getElementById("output").value = cipher(condenseRiddles(riddleList));
 
 			// Refresh the table
 			document.getElementById("table").remove();

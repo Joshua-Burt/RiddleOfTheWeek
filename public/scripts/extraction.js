@@ -1,5 +1,6 @@
 let riddles;
 let gotNextRiddle = false;
+let separator = "|"
 window.gotNextRiddle = gotNextRiddle;
 
 
@@ -13,7 +14,7 @@ class Riddle {
     }
 
     toString(key) {
-        return "~" + this.riddle + "\n=" + key(this.answer) + "\n\n";
+        return "~" + this.riddle + separator + "=" + key(this.answer) + separator + separator;
     }
 }
 
@@ -54,7 +55,7 @@ function swearFilter(string) {
     fetch("rotw/words.txt")
     .then(response => response.text())
     .then(data => {
-        words = data.split("\n\r");
+        words = data.split(separator);
         return words.includes(string)
     });
 }
@@ -67,7 +68,7 @@ function swearFilter(string) {
 function parseRiddles(data) {
     // Split the decrypted riddles into an array
     let riddles = [];
-    let lines = data[0].split("\n");
+    let lines = data[0].split(separator);
 
     // Go through each string in the array
     // Strings starting with ~ are a riddle question
