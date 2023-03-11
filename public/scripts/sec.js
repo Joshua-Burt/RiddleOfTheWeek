@@ -22,7 +22,6 @@ function decrypt(inputStr) {
 
         if(currentLetter === separator) {
             decrypted += separator;
-            i++;
         } else if(alphabet.indexOf(currentLetter) !== -1) {
             decrypted += antiShiftLetter(currentLetter);
         } else {

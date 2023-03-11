@@ -6,6 +6,8 @@ let alphabet = "qwertyuiopasdfghjkl;zxcvbnm,./QWERTYUIOPASDFGHJKL;ZXCVBNM<>?"
  */
 function cipher(inputStr) {
     let encrypted = "";
+    let separator = "|";
+
     for(let i = 0; i < inputStr.length; i++){
         let currentLetter = inputStr.charAt(i);
 
