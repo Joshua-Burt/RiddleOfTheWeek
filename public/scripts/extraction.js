@@ -1,4 +1,5 @@
 let riddles;
+let words;
 let gotNextRiddle = false;
 let separator = "|"
 window.gotNextRiddle = gotNextRiddle;
@@ -49,15 +50,14 @@ fetch("rotw/riddles.txt")
         }
     });
 
-function swearFilter(string) {
-    let words;
-
-    fetch("rotw/words.txt")
+fetch("rotw/words.txt")
     .then(response => response.text())
     .then(data => {
-        words = data.split(separator);
-        return words.includes(string)
+        words = data.split("\r\n");
     });
+
+function hasSwearWord(string) {
+    return words.includes(string)
 }
 
 /**
@@ -203,6 +203,13 @@ function getRiddleNumber() {
  */
 function addToHall() {
     let name = document.getElementById("name").value
+    let nameSplit = name.split(" ");
+
+    for(let i = 0; i < nameSplit.length; i++) {
+        if(hasSwearWord(nameSplit[i].toLowerCase())) {
+            return;
+        }
+    }
 
     if(gotNextRiddle && name.length > 0 && name.length <= 32 && document.getElementById("confirmNoCheat").checked) {
         let color = document.getElementById("inputColor").value
