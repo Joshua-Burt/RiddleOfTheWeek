@@ -56,6 +56,11 @@ h1, h3 {
     padding: 0;
 }
 
+#codeBreakers {
+    position: absolute;
+    right:15px
+}
+
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;
@@ -69,4 +74,47 @@ h1, h3 {
 @font-face {
     font-family: lemonMilk;
     src: url(fonts/lemonmilk.otf);
+}
+
+@media screen and (max-width:800px) {
+    #codeBreakers {
+        position: relative;
+        float: none;
+        width: 400px;
+        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        margin-bottom: 100px;
+    }
+
+    #riddleBox {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    #codeBreakers button {
+        padding:10px;
+    }
+
+    #submit {
+        padding:10px;
+    }
+
+    .center {
+        margin: 0;
+        position: relative;
+        left: 50%;
+        -ms-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+
+    #year {
+        position: relative;
+        width: 400px;
+        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        margin-left: 0;
+    }
+
+    .footer {
+        background-color: #e9e9e9;
+        padding-top: 10px;
+    }
 }
