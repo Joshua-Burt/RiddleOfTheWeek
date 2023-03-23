@@ -58,7 +58,13 @@ h1, h3 {
 
 #codeBreakers {
     position: absolute;
-    right:15px
+    right:15px;
+    top:50%;
+    transform:translate(0,-50%);-ms-transform:translate(0,-50%);
+}
+
+#year {
+    margin-left: 15px;
 }
 
 ::-webkit-scrollbar {
@@ -76,12 +82,13 @@ h1, h3 {
     src: url(fonts/lemonmilk.otf);
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:1000px) {
     #codeBreakers {
         position: relative;
-        float: none;
         width: 400px;
-        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        left: 50%;
+        transform: translate(-50%, 0%);
+        -ms-transform: translate(-50%, -0%);
         margin-bottom: 100px;
     }
 
@@ -91,11 +98,11 @@ h1, h3 {
     }
 
     #codeBreakers button {
-        padding:10px;
+        padding: 10px;
     }
 
     #submit {
-        padding:10px;
+        padding: 10px;
     }
 
     .center {
@@ -106,15 +113,37 @@ h1, h3 {
         transform: translate(-50%, 0);
     }
 
+    #year h2 {
+        font-size: 24px;
+    }
+
     #year {
         position: relative;
         width: 400px;
-        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        left: 50%;
+        transform: translate(-50%, 0%);
+        -ms-transform: translate(-50%, -0%);
         margin-left: 0;
     }
 
     .footer {
         background-color: #e9e9e9;
         padding-top: 10px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    #codeBreakers {
+        position: relative;
+        width: 90%;
+        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        margin-bottom: 100px;
+    }
+
+    #year {
+        position: relative;
+        width: 90%;
+        left:50%;transform:translate(-50%,0%);-ms-transform:translate(-50%,-0%);
+        margin-left: 0;
     }
 }
