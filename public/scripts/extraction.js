@@ -241,3 +241,79 @@ function equalsIgnoringCase(text, other) {
         return text.localeCompare(other, undefined, {sensitivity: 'base'}) === 0 || text.includes(other);
     }
 }
+
+
+// April Fools!
+
+let t = setInterval(setCountdown,1000);
+let countdown = document.getElementById("countdown");
+let message = document.getElementById("message");
+let buttonPresses = 0;
+
+let msgs = ["Hey there",
+            "Didn't you read the button?",
+            "It says not to click it",
+            "That means you're not supposed to click it",
+            "I guess we're just breaking rules today",
+            "Stop clicking the button",
+            "Please stop",
+            "I can be a rule breaker too, you know",
+            "Watch this",
+            "...",
+            "...",
+            "Were you expecting something?",
+            "I'm just trying to enjoy my time here",
+            "But there's an awful lot of clicking going on",
+            "...",
+            "...",
+            "You gotta stop eventually, right?",
+            "I know what I can do to stop this",
+            "If I tell you the answer to the riddle, will you stop?",
+            "...",
+            "You didn't answer me, you just kept clicking the button",
+            "I guess that means no then",
+            "I'll give you a hint at least",
+            "But you have to promise not to click any more afterwards, okay?",
+            "Pinky swear?",
+            "Alright, the hint is...",
+            "April Fools!"]
+
+function setCountdown() {
+    let minutes = Math.floor((msToNextHour()/1000)/60);
+    let seconds = Math.floor((msToNextHour()/1000)%60);
+    countdown.innerHTML = "<h3>"+minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0")+"</h3>";
+
+    if(isValidTime()) {
+        countdown.innerHTML = "<button onclick='onCountDownClick()'>Don't Click Me</button>"
+        clearInterval(t);
+    }
+}
+
+function onCountDownClick() {
+    if(isValidTime()) {
+        buttonPresses++;
+        if(buttonPresses === 1) {
+            message.innerText = msgs[0];
+        } else if(buttonPresses === 2) {
+            message.innerText = msgs[1];
+        } else if(buttonPresses === 4) {
+            message.innerText = msgs[2];
+        }else if(buttonPresses > 4) {
+            message.innerText = msgs[3 + Math.floor(buttonPresses/10)];
+        }
+
+        if(3 + Math.floor(buttonPresses/10) === 26) {
+            countdown.innerHTML = ""
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", '_blank').focus();
+        }
+    }
+}
+
+
+function isValidTime() {
+    return Math.floor(msToNextHour()) <= 0;
+}
+
+function msToNextHour() {
+    return (3600000 - new Date().getTime() % 3600000) - 600000;
+}
