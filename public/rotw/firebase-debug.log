@@ -1,0 +1,46 @@
+[debug] [2023-04-10T21:11:15.661Z] ----------------------------------------------------------------------
+[debug] [2023-04-10T21:11:15.663Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\JoshuaBurt\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-04-10T21:11:15.664Z] CLI Version:   11.19.0
+[debug] [2023-04-10T21:11:15.664Z] Platform:      win32
+[debug] [2023-04-10T21:11:15.664Z] Node Version:  v18.12.1
+[debug] [2023-04-10T21:11:15.670Z] Time:          Mon Apr 10 2023 18:11:15 GMT-0300 (Atlantic Daylight Saving Time)
+[debug] [2023-04-10T21:11:15.671Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-04-10T21:11:15.675Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-04-10T21:11:15.786Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-04-10T21:11:15.786Z] > authorizing via signed-in user (joshuaadburt@gmail.com)
+[debug] [2023-04-10T21:11:15.786Z] [iam] checking project joshuaburt-dev for permissions ["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]
+[debug] [2023-04-10T21:11:15.787Z] > refreshing access token with scopes: []
+[debug] [2023-04-10T21:11:15.788Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-04-10T21:11:15.788Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-04-10T21:11:15.999Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-04-10T21:11:15.999Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-04-10T21:11:16.106Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-04-10T21:11:16.106Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-04-10T21:11:16.113Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/joshuaburt-dev:testIamPermissions [none]
+[debug] [2023-04-10T21:11:16.113Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/joshuaburt-dev:testIamPermissions x-goog-quota-user=projects/joshuaburt-dev
+[debug] [2023-04-10T21:11:16.113Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/joshuaburt-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]}
+[debug] [2023-04-10T21:11:16.546Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/joshuaburt-dev:testIamPermissions 200
+[debug] [2023-04-10T21:11:16.546Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/joshuaburt-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]}
+[debug] [2023-04-10T21:11:16.548Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev [none]
+[debug] [2023-04-10T21:11:16.940Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev 200
+[debug] [2023-04-10T21:11:16.940Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev {"projectId":"joshuaburt-dev","projectNumber":"802039798789","displayName":"joshuaburt-dev","name":"projects/joshuaburt-dev","resources":{"hostingSite":"joshuaburt-dev","realtimeDatabaseInstance":"joshuaburt-dev-default-rtdb","storageBucket":"joshuaburt-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_8c68d655-fe37-49dd-85f1-ecaa8d19785c"}
+[debug] [2023-04-10T21:11:16.940Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev [none]
+[debug] [2023-04-10T21:11:17.239Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev 200
+[debug] [2023-04-10T21:11:17.239Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/joshuaburt-dev {"projectId":"joshuaburt-dev","projectNumber":"802039798789","displayName":"joshuaburt-dev","name":"projects/joshuaburt-dev","resources":{"hostingSite":"joshuaburt-dev","realtimeDatabaseInstance":"joshuaburt-dev-default-rtdb","storageBucket":"joshuaburt-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_8c68d655-fe37-49dd-85f1-ecaa8d19785c"}
+[info] 
+[info] === Deploying to 'joshuaburt-dev'...
+[info] 
+[info] i  deploying database, hosting 
+[info] i  database: checking rules syntax... 
+[debug] [2023-04-10T21:11:17.243Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/joshuaburt-dev/locations/-/instances/joshuaburt-dev-default-rtdb [none]
+[debug] [2023-04-10T21:11:17.755Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/joshuaburt-dev/locations/-/instances/joshuaburt-dev-default-rtdb 200
+[debug] [2023-04-10T21:11:17.755Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/joshuaburt-dev/locations/-/instances/joshuaburt-dev-default-rtdb {"name":"projects/802039798789/locations/us-central1/instances/joshuaburt-dev-default-rtdb","project":"projects/802039798789","databaseUrl":"https://joshuaburt-dev-default-rtdb.firebaseio.com","type":"DEFAULT_DATABASE","state":"ACTIVE"}
+[debug] [2023-04-10T21:11:17.760Z] >>> [apiv2][query] PUT https://joshuaburt-dev-default-rtdb.firebaseio.com/.settings/rules.json dryRun=true
+[debug] [2023-04-10T21:11:17.761Z] >>> [apiv2][body] PUT https://joshuaburt-dev-default-rtdb.firebaseio.com/.settings/rules.json "{\r\n  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */\r\n  \"rules\": {\r\n    \".read\": true,\r\n    \".write\": true\r\n  }\r\n}"
+[debug] [2023-04-10T21:11:18.078Z] <<< [apiv2][status] PUT https://joshuaburt-dev-default-rtdb.firebaseio.com/.settings/rules.json 200
+[debug] [2023-04-10T21:11:18.079Z] <<< [apiv2][body] PUT https://joshuaburt-dev-default-rtdb.firebaseio.com/.settings/rules.json {"status":"ok"}
+[info] +  database: rules syntax for database joshuaburt-dev-default-rtdb is valid 
+[debug] [2023-04-10T21:11:18.083Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/joshuaburt-dev/versions [none]
+[debug] [2023-04-10T21:11:18.083Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/joshuaburt-dev/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-04-10T21:11:18.910Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/joshuaburt-dev/versions 200
