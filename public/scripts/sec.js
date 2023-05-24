@@ -1,45 +1,27 @@
 /**
  * @param inputStr      Encrypted string or array
- * @returns {array<string>}    Decrypted string
+ * @returns string    Decrypted string
  */
 function sec(inputStr) {
-    let decrypted = [];
-    if(Array.isArray(inputStr)) {
-        for(let i = 0; i < inputStr.length; i++) {
-            decrypted.push(decrypt(inputStr[i]));
-        }
-    } else {
-        decrypted.push(decrypt(inputStr));
-    }
+    let plainText = "";
 
-    return decrypted;
-}
+    for(let i = 0; i < inputStr.length; i++) {
 
-function decrypt(inputStr) {
-    let decrypted = "";
-    for(let i = 0; i < inputStr.length; i++){
-        let currentLetter = inputStr.charAt(i);
-
-        if(currentLetter === separator) {
-            decrypted += separator;
-        } else if(alphabet.indexOf(currentLetter) !== -1) {
-            decrypted += antiShiftLetter(currentLetter);
+        if(inputStr[i] === "|" || inputStr[i] === "~" || inputStr[i] === "=") {
+            plainText += inputStr[i];
         } else {
-            decrypted += currentLetter;
+            let characterCode = inputStr.charCodeAt(i);
+            characterCode -= mask[i % 10];
+
+            if(characterCode > 90 && characterCode < 97) {
+                characterCode = 90 - (characterCode % 90)
+            } else if(characterCode < 32) {
+                characterCode = 122 - (32 - characterCode)
+            }
+
+            plainText += String.fromCharCode(characterCode);
         }
     }
-    return decrypted;
-}
 
-
-
-function antiShiftLetter(letter) {
-    let positionInAlphabet = alphabet.indexOf(letter);
-    let newPosition = positionInAlphabet - 10;
-
-    if(newPosition < 0) {
-        newPosition += alphabet.length;
-    }
-
-    return alphabet.charAt(newPosition);
+    return plainText;
 }
