@@ -1,26 +1,33 @@
-let mask = [1,2,3,4,5,6,7,8,9,10]
+let addingNumbers = [1,2,3,4,5,6,7,8,9,10]
+let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 function cipher(inputStr) {
 	let cipherText = "";
 
 	for(let i = 0; i < inputStr.length; i++) {
+		// Get a letter from the input string
+		let currentLetter = inputStr[i];
 
-		if(inputStr[i] === "|" || inputStr[i] === "~" || inputStr[i] === "=") {
-			cipherText += inputStr[i];
+		// If the current letter isn't in the alphabet, just add it without encrypting it
+		if(alphabet.indexOf(currentLetter) === -1) {
+			cipherText += currentLetter;
 		} else {
-			let characterCode = inputStr.charCodeAt(i);
-			characterCode += mask[i % 10];
+			// Find the position of the current letter in the alphabet string at the top
+			// Example: the letter 'a' has the position 0, 'b' has 1, etc.
+			let position = alphabet.indexOf(currentLetter);
 
+			// We add a number to the position number to get a new position
+			// Hint: this is a big part of the encryption
+			let newPosition = position + addingNumbers[i % 10];
 
-			// Make sure it does not include the characters
-			// [ \ ] ^ _ `
-			if(characterCode > 90 && characterCode < 97) {
-				characterCode = 97 + (characterCode % 90);
-			} else if(characterCode > 122) {
-				characterCode = 32 + characterCode % 122;
+			// If the new position is bigger than the alphabet, wrap back to the beginning
+			if(newPosition >= alphabet.length) {
+				newPosition -= alphabet.length;
 			}
 
-			cipherText += String.fromCharCode(characterCode);
+			let newLetter = alphabet[newPosition];
+
+			cipherText += newLetter;
 		}
 	}
 

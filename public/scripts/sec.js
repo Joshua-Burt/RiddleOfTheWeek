@@ -3,23 +3,37 @@
  * @returns string    Decrypted string
  */
 function sec(inputStr) {
+   let decrypted = [];
+
+    if(Array.isArray(inputStr)) {
+        for(let i = 0; i < inputStr.length; i++) {
+            decrypted.push(decrypt(inputStr[i]));
+        }
+    } else {
+        decrypted.push(decrypt(inputStr));
+    }
+
+    return decrypted;
+}
+
+function decrypt(inputStr) {
     let plainText = "";
 
     for(let i = 0; i < inputStr.length; i++) {
 
-        if(inputStr[i] === "|" || inputStr[i] === "~" || inputStr[i] === "=") {
+        if(alphabet.indexOf(inputStr[i]) === -1) {
             plainText += inputStr[i];
         } else {
-            let characterCode = inputStr.charCodeAt(i);
-            characterCode -= mask[i % 10];
+            let position = alphabet.indexOf(inputStr[i]);
+            let newPosition = position - addingNumbers[i % 10];
 
-            if(characterCode > 90 && characterCode < 97) {
-                characterCode = 90 - (characterCode % 90)
-            } else if(characterCode < 32) {
-                characterCode = 122 - (32 - characterCode)
+            if(newPosition < 0) {
+                newPosition += alphabet.length;
             }
 
-            plainText += String.fromCharCode(characterCode);
+            let newLetter = alphabet[newPosition];
+
+            plainText += newLetter;
         }
     }
 
