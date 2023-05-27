@@ -21,17 +21,17 @@ function decrypt(inputStr) {
 
     for(let i = 0; i < inputStr.length; i++) {
 
-        if(alphabet.indexOf(inputStr[i]) === -1) {
+        if(alphabet_original.indexOf(inputStr[i]) === -1) {
             plainText += inputStr[i];
         } else {
-            let position = alphabet.indexOf(inputStr[i]);
+            let position = alphabet_original.indexOf(inputStr[i]);
             let newPosition = position - addingNumbers[i % 10];
 
             if(newPosition < 0) {
-                newPosition += alphabet.length;
+                newPosition += alphabet_original.length;
             }
 
-            let newLetter = alphabet[newPosition];
+            let newLetter = alphabet_original[newPosition];
 
             plainText += newLetter;
         }

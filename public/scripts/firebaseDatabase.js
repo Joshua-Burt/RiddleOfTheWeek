@@ -21,7 +21,7 @@ const analytics = getAnalytics(app);
 
 const db = getDatabase();
 let lists = [];
-let mostRecentEncryption = 4;
+let mostRecentEncryption = 5;
 let currentEncryptionNum = mostRecentEncryption;
 
 
