@@ -73,6 +73,8 @@ function parseRiddles(data) {
     // Go through each string in the array
     // Strings starting with ~ are a riddle question
     // Strings starting with = are a riddle answer
+    // Lines are separated by |
+
     for(let i = 0; i < lines.length; i++) {
         if(lines[i].includes("~")) {
             // Once the ~ has been found, the line after is always the =
@@ -91,7 +93,7 @@ function parseRiddles(data) {
                 answer[j] = cipher(answer[j]);
             }
 
-            // Skip over a line to ignore the =
+            // Skip over a line to account for the =
             i += 1;
 
             // Create a new riddle object and add to the array of riddles

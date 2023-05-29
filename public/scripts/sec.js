@@ -1,9 +1,10 @@
 /**
  * @param inputStr      Encrypted string or array
- * @returns {array<string>}    Decrypted string
+ * @returns string    Decrypted string
  */
 function sec(inputStr) {
-    let decrypted = [];
+   let decrypted = [];
+
     if(Array.isArray(inputStr)) {
         for(let i = 0; i < inputStr.length; i++) {
             decrypted.push(decrypt(inputStr[i]));
@@ -16,30 +17,25 @@ function sec(inputStr) {
 }
 
 function decrypt(inputStr) {
-    let decrypted = "";
-    for(let i = 0; i < inputStr.length; i++){
-        let currentLetter = inputStr.charAt(i);
+    let plainText = "";
 
-        if(currentLetter === separator) {
-            decrypted += separator;
-        } else if(alphabet.indexOf(currentLetter) !== -1) {
-            decrypted += antiShiftLetter(currentLetter);
+    for(let i = 0; i < inputStr.length; i++) {
+
+        if(alphabet.indexOf(inputStr[i]) === -1) {
+            plainText += inputStr[i];
         } else {
-            decrypted += currentLetter;
+            let position = alphabet.indexOf(inputStr[i]);
+            let newPosition = position - addingNumbers[i % 10];
+
+            if(newPosition < 0) {
+                newPosition += alphabet.length;
+            }
+
+            let newLetter = alphabet[newPosition];
+
+            plainText += newLetter;
         }
     }
-    return decrypted;
-}
 
-
-
-function antiShiftLetter(letter) {
-    let positionInAlphabet = alphabet.indexOf(letter);
-    let newPosition = positionInAlphabet - 10;
-
-    if(newPosition < 0) {
-        newPosition += alphabet.length;
-    }
-
-    return alphabet.charAt(newPosition);
+    return plainText;
 }
