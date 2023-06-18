@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Encryption 3 - Alphabet Shift</title>
-    <link rel="stylesheet" href="../../stylesheet.css">
-    <link rel="stylesheet" href="../../lib/http_www.w3schools.com_w3css_4_w3.css">
+    <title>Encryption 4 - Shift 10 Places</title>
+    <link rel="stylesheet" href="../../../stylesheet.css">
+    <link rel="stylesheet" href="../../../lib/http_www.w3schools.com_w3css_4_w3.css">
     <link rel="shortcut icon" type="image/x-icon" href="../../rotw/favicon.ico"/>
     <script src="cipher.js"></script>
     <style>
@@ -44,7 +44,8 @@
     <div id="word" class="w3-panel w3-sand w3-serif w3-border word"></div> (Original Word)
     <h2>🢃</h2>
     <div id="alpha" class="w3-panel w3-sand w3-serif w3-border code" style="font-family: monospace"></div>
-    <div id="cipherAlpha" class="w3-panel w3-sand w3-serif w3-border base" style="font-family: monospace"></div>(Alphabet Shift Lookup)
+    <br>Shift 10 positions to the right (H turns into an N)
+    <div id="addedAlpha" class="w3-panel w3-sand w3-serif w3-border base" style="font-family: monospace"></div>
     <h2>🢃</h2>
     <div id="encrypted" class="w3-panel w3-sand w3-serif w3-border word"></div> (Encrypted Word)
     <hr>
@@ -55,15 +56,15 @@
 
 
 <script>
-	let alphabet = "ABCDEFG<div class='highlight'>H</div>IJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz"
-	let cipher_alphabet = "codingA<div class='highlight'>B</div>CDEFGHIJKLMNOPQRSTUVWXYZ rulesabfhjkmpqtvwxyz"
+    let alphabet_original = "qwertyuiopasdfghjkl;zxcvbnm,./QWERTYUIOPASDFG<div class='highlight'>H</div>JKL;ZXCVBNM<>?"
+	let addition_position = "qwertyuiopasdfghjkl;zxcvbnm,./QWERTYUIOPASDFGHJKL;ZXCVB<div class='highlight'>N</div>M<>?"
 
     let word = "<div class='highlight'>H</div>ello!"
 
     document.getElementById("word").innerHTML = "<h2>" + word + "</h2>";
-    document.getElementById("alpha").innerHTML = "<h2>" + alphabet + "</h2>";
-    document.getElementById("cipherAlpha").innerHTML = "<h2>" + cipher_alphabet + "</h2>";
-    document.getElementById("encrypted").innerHTML = "<h2>" + "<div class='highlight'>B</div>Zaah!" + "</h2>";
+    document.getElementById("alpha").innerHTML = "<h2>" + alphabet_original + "</h2>";
+    document.getElementById("addedAlpha").innerHTML = "<h2>" + addition_position + "</h2>";
+    document.getElementById("encrypted").innerHTML = "<h2>" + "<div class='highlight'>N</div>d..l!" + "</h2>";
 </script>
 </body>
 </html>
