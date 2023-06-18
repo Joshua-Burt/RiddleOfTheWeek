@@ -14,7 +14,6 @@
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
 
     <script src="scripts/cipher.js" defer></script>
-    <script src="scripts/confetti.js" defer></script>
     <script src="scripts/extraction.js" defer></script>
     <script src="scripts/sec.js" defer></script>
     <script type="module" src="scripts/database.js"></script>
@@ -93,16 +92,8 @@
                 <button type="submit" id="submit" onclick="checkAnswer()">Submit</button>
 
             <div id="hallInput" style="display: none">
-                <label for="name">Congrats on cracking the code!<br>Add your name to the Hall of Code Breakers!</label>
-
-                <p><input type="text" id="name"/></p>
-                <p><input type="color" id="inputColor" value="#000000">
-                <label for="inputColor">Text Colour</label></p>
-
-                <input type="checkbox" id="confirmNoCheat" onclick="enableSubmission()">
-                <label for="confirmNoCheat">I solemnly swear to not spoil the answer for others</label>
-
-                <p><button type="submit" id="submitBreaker" onclick="addToHall()" disabled="disabled">Submit name to Hall of Code Breakers</button></p>
+                <b>Congrats on cracking the code!</b>
+                <p>You </p>
             </div>
             <p>
 
@@ -111,9 +102,8 @@
     </div>
 
     <div id="codeBreakers" class="w3-panel w3-sand w3-large w3-serif w3-round-xxlarge w3-border">
-        <h2 style='color:#f5b416; -webkit-text-stroke: 1px #896508'>Hall of Code Breakers</h2>
-        <b>Figure out and submit NEXT week's answer<br>to add your name here</b>
-        <p>See the JavaScript here: <a href="displayCipherScript.html" target="_blank">cipher.js</a></p>
+        <h2 style='color:#f5b416; -webkit-text-stroke: 1px #896508'>Hall of Past Code Breakers</h2>
+        <b>These individuals deciphered<br>the encrypted riddles!</b>
         <hr>
 
         <button id="prevCodeBreaker" onclick="window.previousCodeBreakers()"><</button>
