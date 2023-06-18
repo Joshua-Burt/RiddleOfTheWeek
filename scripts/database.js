@@ -82,7 +82,7 @@ function displayExplanation() {
 		document.getElementById("explanation").style.display = "inline"
 
 		if(UrlExists("/explain/cipher" + currentEncryptionNum + "/encryption.html")) {
-			document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/encryption.html'>Here</a>";
+			document.getElementById("explainLink").innerHTML = "<a href='/explain/cipher" + currentEncryptionNum + "/encryption.html' target='_blank'>Here</a>";
 		} else {
 			document.getElementById("explainLink").innerHTML = "Explanation coming Soon™!"
 		}

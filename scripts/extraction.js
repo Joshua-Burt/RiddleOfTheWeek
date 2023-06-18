@@ -1,5 +1,4 @@
 let riddles;
-let words;
 let gotNextRiddle = false;
 let separator = "|"
 window.gotNextRiddle = gotNextRiddle;
@@ -50,15 +49,6 @@ fetch("rotw/riddles.txt")
         }
     });
 
-fetch("rotw/words.txt")
-    .then(response => response.text())
-    .then(data => {
-        words = data.split("\r\n");
-    });
-
-function hasSwearWord(string) {
-    return words.includes(string)
-}
 
 /**
  * Take the unencrypted riddles and parse the questions and answers into objects
@@ -173,13 +163,6 @@ function checkAnswer() {
 }
 
 /**
- * Ensures the checkbox is selected before the user can submit their name
- */
-function enableSubmission() {
-    document.getElementById("submitBreaker").disabled = !document.getElementById("confirmNoCheat").checked;
-}
-
-/**
  * @returns {number}    Current week number
  */
 Date.prototype.getWeekNumber = function(){
@@ -196,33 +179,6 @@ Date.prototype.getWeekNumber = function(){
  */
 function getRiddleNumber() {
     return new Date().getWeekNumber();
-}
-
-
-/**
- * Retrieves the name and text colour for the Hall of Code Breakers
- * and writes it to the database
- */
-function addToHall() {
-    let name = document.getElementById("name").value
-    let nameSplit = name.split(" ");
-
-    for(let i = 0; i < nameSplit.length; i++) {
-        if(hasSwearWord(nameSplit[i].toLowerCase())) {
-            return;
-        }
-    }
-
-    if(gotNextRiddle && name.length > 0 && name.length <= 32 && document.getElementById("confirmNoCheat").checked) {
-        let color = document.getElementById("inputColor").value
-
-        window.writeUserData(name, color);
-
-        // Wait 0.1 seconds before reloading to make sure Firebase uploads
-        setTimeout(function(){
-            location.reload()
-        }, 100);
-    }
 }
 
 
