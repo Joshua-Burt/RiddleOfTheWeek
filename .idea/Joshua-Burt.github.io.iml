@@ -15,5 +15,8 @@
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="w3" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="index" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
 </module>
