@@ -1,7 +1,1 @@
-"Develop a passion for learning. If you do, you will never cease to grow."<br> — Anthony J. D'Angelo
-"Study hard what interests you the most in the most undisciplined,<br>irreverent and original manner possible."<br> — Richard Feynman
-"That is what learning is. You suddenly understand something you've <br>understood all your life, but in a new way."<br> — Doris Lessing
-"I am still learning."<br> — Michelangelo (age 87)
-"Everybody should learn to program a computer, because it teaches you how to think."<br> — Steve Jobs
-"Computer Science is no more about computers than astronomy is about telescopes."<br> — Edsger W. Dijkstra
-"Computers are good at following instructions, but not at reading your mind."<br> — Donald Knuth
+"Develop a passion for learning. If you do, you will never cease to grow."<br> — Anthony J. D'Angelo|"Study hard what interests you the most in the most undisciplined,<br>irreverent and original manner possible."<br> — Richard Feynman|"That is what learning is. You suddenly understand something you've <br>understood all your life, but in a new way."<br> — Doris Lessing|"I am still learning."<br> — Michelangelo (age 87)|"Everybody should learn to program a computer, because it teaches you how to think."<br> — Steve Jobs|"Computer Science is no more about computers than astronomy is about telescopes."<br> — Edsger W. Dijkstra|"Computers are good at following instructions, but not at reading your mind."<br> — Donald Knuth

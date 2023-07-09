@@ -23,7 +23,7 @@ let quotes = [];
 fetch("rotw/quotes.txt")
     .then(response => response.text())
     .then(data => {
-        quotes = data.split("\r\n");
+        quotes = data.split("|");
     });
 
 /**
