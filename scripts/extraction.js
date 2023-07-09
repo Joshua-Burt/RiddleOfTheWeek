@@ -18,6 +18,14 @@ class Riddle {
     }
 }
 
+let quotes = [];
+
+fetch("rotw/quotes.txt")
+    .then(response => response.text())
+    .then(data => {
+        quotes = data.split("\r\n");
+    });
+
 /**
  * Get file containing the encrypted riddle questions and answers
  */
@@ -139,6 +147,8 @@ function checkAnswer() {
         if(equalsIgnoringCase(userAnswer.trim(), sec2)) {
             document.body.style.backgroundColor = 'rgb(' + [250,220,0].join(",") + ')';
             document.getElementById("result").style.display = "none";
+            // Add quote
+            document.getElementById("quote").innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById("hallInput").style.display = "inline-block";
             document.getElementById("answer").className = "blur";
 
