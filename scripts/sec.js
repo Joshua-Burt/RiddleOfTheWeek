@@ -20,22 +20,36 @@ function decrypt(inputStr) {
     let plainText = "";
 
     for(let i = 0; i < inputStr.length; i++) {
+        let currentLetter = inputStr[i];
 
-        if(alphabet.indexOf(inputStr[i]) === -1) {
-            plainText += inputStr[i];
+        if(alphabet.indexOf(currentLetter) === -1) {
+            plainText += currentLetter;
         } else {
-            let position = alphabet.indexOf(inputStr[i]);
-            let newPosition = position - addingNumbers[i % 10];
-
-            if(newPosition < 0) {
-                newPosition += alphabet.length;
-            }
-
-            let newLetter = alphabet[newPosition];
+            // Add the current letter's and previous letter's positions together
+            let newLetter = subPositions(currentLetter, plainText[i - 1]);
 
             plainText += newLetter;
         }
     }
 
     return plainText;
+}
+
+function subPositions(currentLetter, previousDecryptedLetter) {
+    let currentPosition = alphabet.indexOf(currentLetter);
+    let subAmount = alphabet.indexOf(previousDecryptedLetter);
+
+    // If the previous letter doesn't exist in the alphabet
+    // (aka, "indexOf" gives back -1)
+    if(subAmount === -1) {
+        subAmount = 1;
+    }
+
+    let newCharacter = (currentPosition - subAmount);
+
+    if(newCharacter < 0) {
+        newCharacter += alphabet.length;
+    }
+
+    return alphabet[newCharacter];
 }
