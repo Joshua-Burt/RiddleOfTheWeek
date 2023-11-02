@@ -23,15 +23,15 @@ function cipher(inputStr) {
 }
 
 function addPositions(currentLetter, previousLetter) {
-	let currentPosition = alphabet.indexOf(currentLetter);
-	let addAmount = alphabet.indexOf(previousLetter);
+	let currentLetterPosition = alphabet.indexOf(currentLetter);
+	let previousLetterPosition = alphabet.indexOf(previousLetter);
 
 	// If the previous letter doesn't exist in the alphabet
 	// (aka, "indexOf" gives back -1)
-	if(addAmount === -1) {
-		addAmount = 1;
+	if(previousLetterPosition === -1) {
+		previousLetterPosition = 1;
 	}
 
-	let newCharacter = (currentPosition + addAmount) % alphabet.length;
-	return alphabet[newCharacter];
+	let newPosition = (currentLetterPosition + previousLetterPosition) % alphabet.length;
+	return alphabet[newPosition];
 }
