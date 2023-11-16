@@ -52,7 +52,7 @@ fetch("rotw/riddles.txt")
                 // Last Riddle
                 let lastRiddle = getRiddle(lastRiddleNumber);
                 document.getElementById("last").innerHTML = "<h3>Last week's riddle & answer:</h3><br><i>" +
-                    lastRiddle.riddle + "</i><br>" + "<b>" + sec(lastRiddle.answer) + "</b>";
+                    lastRiddle.riddle + "</i><br>" + "<b>" + sec(lastRiddle.answer).join(", ") + "</b>";
             }
         }
     });
