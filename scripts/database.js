@@ -1,5 +1,5 @@
 let lists = [];
-let mostRecentEncryption = 5;
+let mostRecentEncryption = 6;
 let currentEncryptionNum = mostRecentEncryption;
 
 fetch("rotw/database.json")

@@ -455,6 +455,12 @@
         "color": "#00ffd5",
         "name": "hi"
       }
+    },
+    {
+      "0": {
+        "color": "#00FFFF",
+        "name": "Ady"
+      }
     }
   ]
 }
