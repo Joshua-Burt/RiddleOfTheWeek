@@ -1,9 +1,10 @@
 /**
  * @param inputStr      Encrypted string or array
- * @returns string    Decrypted string
+ * @returns string[]    Decrypted string
  */
 function sec(inputStr) {
    let decrypted = [];
+    currentPosition = 20;
 
     if(Array.isArray(inputStr)) {
         for(let i = 0; i < inputStr.length; i++) {
@@ -18,38 +19,35 @@ function sec(inputStr) {
 
 function decrypt(inputStr) {
     let plainText = "";
+    let array = inputStr.split(" ")
 
-    for(let i = 0; i < inputStr.length; i++) {
-        let currentLetter = inputStr[i];
+    for(let i = 0; i < array.length; i++) {
+        let currentGroup = array[i];
 
-        if(alphabet.indexOf(currentLetter) === -1) {
-            plainText += currentLetter;
-        } else {
-            // Add the current letter's and previous letter's positions together
-            let newLetter = subPositions(currentLetter, plainText[i - 1]);
+        if(isNumber(currentGroup)) {
+            let newLetter = subPositions(currentGroup);
 
             plainText += newLetter;
+        } else if(currentGroup === "") {
+            plainText += " ";
+        } else {
+            plainText += currentGroup;
         }
     }
 
     return plainText;
 }
 
-function subPositions(currentLetter, previousDecryptedLetter) {
-    let currentPosition = alphabet.indexOf(currentLetter);
-    let subAmount = alphabet.indexOf(previousDecryptedLetter);
+function subPositions(currentPos) {
 
-    // If the previous letter doesn't exist in the alphabet
-    // (aka, "indexOf" gives back -1)
-    if(subAmount === -1) {
-        subAmount = 1;
-    }
+    let currentPi = parseInt(pi.at(currentPosition).toString() + pi.at(currentPosition + 1).toString())
 
-    let newCharacter = (currentPosition - subAmount);
+    currentPos -= currentPi;
 
-    if(newCharacter < 0) {
-        newCharacter += alphabet.length;
-    }
+    currentPosition += 2;
 
-    return alphabet[newCharacter];
+    return alphabet[currentPos];
 }
+
+
+function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
