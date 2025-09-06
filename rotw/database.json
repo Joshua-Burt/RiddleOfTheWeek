@@ -460,6 +460,10 @@
       "0": {
         "color": "#00FFFF",
         "name": "Ady"
+      },
+	  "1": {
+        "color": "#2E6F40",
+        "name": "Noah"
       }
     }
   ]
